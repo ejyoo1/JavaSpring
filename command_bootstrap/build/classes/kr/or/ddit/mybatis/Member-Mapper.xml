@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member-Mapper">
+	
+	<!-- 회원 ID 기준 조회 -->
+	<select id="selectMemberById" parameterType="str" resultType="member">
+		select *
+		from member
+		where id = #{id}
+	</select>
+	
+	<!-- 멤버 목록 -->
+	<select id="selectMemberList" resultType="member">
+		select id id
+		    ,pwd pwd
+		    ,email email
+		    ,picture picture
+		    ,enabled enabled
+		    ,regDate regDate
+		    ,phone phone
+		    ,name name
+		    ,register register
+		    ,address address
+		    ,authority authority
+		from member
+	</select>
+	
+	<insert id="insertMemberByInfo" parameterType="member">
+		insert into member(
+				id id
+		    ,pwd pwd
+		    ,email email
+		    ,picture picture
+		    ,enabled enabled
+		    ,regDate regDate
+		    ,phone phone
+		    ,name name
+		    ,register register
+		    ,address address
+		    ,authority authority
+		)values(
+		  #{id}
+		  ,#{pwd}
+		  ,#{email}
+		  ,#{picture}
+		  ,#{enabled}
+		  ,#{regDate}
+		  ,#{phone}
+		  ,#{name}
+		  ,#{register}
+		  ,#{address}
+		  ,#{authority}
+		)
+	</insert>
+	
+	<update id="updateMemberByInfo" parameterType="member">
+		update member set
+		  	id = #{id}
+		    ,pwd = #{pwd}
+		    ,email = #{email}
+		    ,picture = #{picture}
+		    ,enabled = #{enabled}
+		    ,regDate = #{regDate}
+		    ,phone = #{phone}
+		    ,name = #{name}
+		    ,register = #{register}
+		    ,address = #{address}
+		    ,authority = #{authority}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteMemberById" parameterType="str">
+		delete 
+		from member 
+		where id = #{id}
+	</delete>
+	
+</mapper>

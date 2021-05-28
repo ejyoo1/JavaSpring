@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/views/decorators"> <!-- 템플릿 위치 -->
+	<decorator name="main" page="main_decorator.jsp"><!-- 적용할 템플릿 -->
+		<pattern>/index.do*</pattern><!-- 적용할 템플릿 URL -->
+<!-- 		<pattern>/member/list.do*</pattern> -->
+	</decorator>
+	
+<!-- 	<excludes>패턴 예외 -->
+<!-- 		<pattern>/login*</pattern> -->
+<!-- 	</excludes> -->
+</decorators>
