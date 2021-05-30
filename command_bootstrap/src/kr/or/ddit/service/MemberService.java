@@ -18,5 +18,14 @@ public interface MemberService {
 	MemberVO getMember(String id) throws SQLException;
 	
 	// 회원 목록 조회
-	List<MemberVO> getMemberList() throws SQLException, NotEnoughResultException;
+	List<MemberVO> getMemberList() throws SQLException;
+	
+	// 회원 정보 수정
+	int modifyMember(MemberVO member) throws SQLException, NotEnoughResultException;
+	
+	// 회원 정보 삭제
+	int removeMember(String id) throws SQLException, NotFoundIDException;
+	
+	// 회원 정보 추가
+	int registMember(MemberVO member) throws SQLException, NotEnoughResultException;
 }
