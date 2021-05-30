@@ -1,5 +1,6 @@
 package kr.or.ddit.handler;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -20,20 +21,30 @@ public class MemberListHandler implements Handler {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "member/memberList";
+		String action = request.getParameter("action");
 		List<MemberVO> memberList = null;
+		MemberVO member = null;
 		
 		try {
-			memberList = memberService.getMemberList();
-			request.setAttribute("memberList", memberList);
+			if("search".equals(action)) {
+				String id = request.getParameter("id");
+				member = memberService.getMember(id);
+				PrintWriter out = response.getWriter();
+				if(member != null) {
+					out.print("1");
+				}
+			} else {
+				memberList = memberService.getMemberList();
+				request.setAttribute("memberList", memberList);
+				return url;
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (NotEnoughResultException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("예외처리 되지 않은 예외 발생함.");
 		}
-		return url;
+		return null;
 	}
 
 }
