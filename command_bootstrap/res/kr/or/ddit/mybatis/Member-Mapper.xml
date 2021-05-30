@@ -27,47 +27,25 @@
 		from member
 	</select>
 	
-	<insert id="insertMemberByInfo" parameterType="member">
+	<insert id="insertMember" parameterType="member">
 		insert into member(
-				id id
-		    ,pwd pwd
-		    ,email email
-		    ,picture picture
-		    ,enabled enabled
-		    ,regDate regDate
-		    ,phone phone
-		    ,name name
-		    ,register register
-		    ,address address
-		    ,authority authority
+			id
+		    ,pwd
+		    ,email
+		    ,phone
 		)values(
 		  #{id}
 		  ,#{pwd}
 		  ,#{email}
-		  ,#{picture}
-		  ,#{enabled}
-		  ,#{regDate}
 		  ,#{phone}
-		  ,#{name}
-		  ,#{register}
-		  ,#{address}
-		  ,#{authority}
 		)
 	</insert>
 	
-	<update id="updateMemberByInfo" parameterType="member">
+	<update id="updateMember" parameterType="member">
 		update member set
-		  	id = #{id}
-		    ,pwd = #{pwd}
+		    pwd = #{pwd}
 		    ,email = #{email}
-		    ,picture = #{picture}
-		    ,enabled = #{enabled}
-		    ,regDate = #{regDate}
 		    ,phone = #{phone}
-		    ,name = #{name}
-		    ,register = #{register}
-		    ,address = #{address}
-		    ,authority = #{authority}
 		where id = #{id}
 	</update>
 	
