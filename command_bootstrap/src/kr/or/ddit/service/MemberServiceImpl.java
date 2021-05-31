@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import kr.or.ddit.command.Criteria;
 import kr.or.ddit.dao.MemberDAO;
 import kr.or.ddit.dto.MemberVO;
 import kr.or.ddit.exception.InvalidPasswordException;
@@ -70,93 +71,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MemberVO> getMemberList() throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<MemberVO> memberList = null;
 		
 		try {
-			memberList = memberDAO.selectMember(session);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("DB 작업 도중 문제 발생함.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("예외처리 되지 않은 예외 발생함.");
-		} finally {
-	    	  session.close();
+			List<MemberVO> memberList = memberDAO.selectMemberList(session);
+			return memberList;
+	    } finally {
+	    	session.close();
 	    }
-		return memberList;
 	}
 
 	@Override
-	public int modifyMember(MemberVO member) throws SQLException, NotEnoughResultException {
+	public List<MemberVO> getMemberList(Criteria cri) throws SQLException { // 오버로딩(확장)
 		SqlSession session = sqlSessionFactory.openSession();
-		int cnt = 0;
 		
 		try {
-		  cnt = memberDAO.updateMember(session, member);
-		  if(cnt == 0) {
-			  throw new NotEnoughResultException();
-		  }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("DB 작업 도중 문제 발생함.");
-		} catch (NotEnoughResultException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("예외처리 되지 않은 예외 발생함.");
-		} finally {
-	    	  session.close();
+			List<MemberVO> memberList = memberDAO.selectMemberList(session, cri);
+			return memberList;
+	    } finally {
+	    	session.close();
 	    }
-		return cnt;
 	}
-
-	@Override
-	public int removeMember(String id) throws SQLException, NotFoundIDException {
-		SqlSession session = sqlSessionFactory.openSession();
-		int cnt = 0;
-		
-	      try {
-	    	  MemberVO member = memberDAO.selectMemberById(session, id);
-	    	  if (member == null) 
-	    		  throw new NotFoundIDException();
-	    	  cnt = memberDAO.deleteMember(session, id);
-	      } catch (SQLException e){
-	    	  e.printStackTrace();
-	    	  System.out.println("DB 작업 도중 문제 발생함.");
-	      }	catch (NotFoundIDException e) { 
-	    	  e.printStackTrace();
-	      } catch (Exception e){
-	    	  e.printStackTrace();
-	    	  System.out.println("처리되지 않은 예외 발생함.");
-	      } finally {
-	    	  session.close();
-	      }
-	      return cnt;
-	}
-
-	@Override
-	public int registMember(MemberVO member) throws SQLException, NotEnoughResultException {
-		SqlSession session = sqlSessionFactory.openSession();
-		int cnt = 0;
-		
-		try {
-		  cnt = memberDAO.insertMember(session, member);
-		  if(cnt == 0) {
-			  throw new NotEnoughResultException();
-		  }
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("DB 작업 도중 문제 발생함.");
-		} catch (NotEnoughResultException e) {
-			e.printStackTrace();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("예외처리 되지 않은 예외 발생함.");
-		} finally {
-	    	  session.close();
-	    }
-		return cnt;
-	}
-
 }

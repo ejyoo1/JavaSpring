@@ -3,8 +3,10 @@ package kr.or.ddit.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.command.Criteria;
 import kr.or.ddit.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -15,39 +17,24 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return member;
 	}
-
+	
 	@Override
-	public List<MemberVO> selectMember(SqlSession session) throws SQLException {
+	public List<MemberVO> selectMemberList(SqlSession session) throws SQLException {
 		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
-		
 		return memberList;
 	}
 
 	@Override
-	public int updateMember(SqlSession session, MemberVO member) throws SQLException {
-		int cnt = 0;
-		
-		cnt = session.update("Member-Mapper.updateMember", member);
-		
-		return cnt;
+	public List<MemberVO> selectMemberList(SqlSession session, Criteria cri) throws SQLException { // 오버로딩(확장)
+		int offset = cri.getStartRowNum(); // 시작할 Row 번호
+		int limit = cri.getPerPageNum(); // 한페이지에 보여줄 개수
+		RowBounds rowBounds = new RowBounds(offset,limit); // 몇번부터 몇번까지 짜를 값 세팅
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList", null, rowBounds);
+		return memberList;
 	}
 	
-	public int deleteMember(SqlSession session, String id) throws SQLException {
-		int cnt = 0;
-		
-		cnt = session.delete("Member-Mapper.deleteMemberById", id);
-		
-		return cnt;
-	}
 
-	@Override
-	public int insertMember(SqlSession session, MemberVO member) throws SQLException {
-		int cnt = 0;
-		
-		cnt = session.insert("Member-Mapper.insertMember", member);
-		
-		return cnt;
-	}
+	
 	
 
 }

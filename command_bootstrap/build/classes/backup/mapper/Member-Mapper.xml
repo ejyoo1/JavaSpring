@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member-Mapper">
+	
+	<!-- 회원 ID 기준 조회 -->
+	<select id="selectMemberById" parameterType="str" resultType="member">
+		select *
+		from member
+		where id = #{id}
+	</select>
+	
+	<select id="selectMemberList" resultType="member">
+		select 
+		*
+		from member
+	</select>
+	
+<!-- 멤버 목록 --> 
+<!-- 	<select id="selectMemberList" resultType="member"> -->
+<!-- 		select id id -->
+<!-- 		    ,pwd pwd -->
+<!-- 		    ,email email -->
+<!-- 		    ,picture picture -->
+<!-- 		    ,enabled enabled -->
+<!-- 		    ,regDate regDate -->
+<!-- 		    ,phone phone -->
+<!-- 		    ,name name -->
+<!-- 		    ,register register -->
+<!-- 		    ,address address -->
+<!-- 		    ,authority authority -->
+<!-- 		from member -->
+<!-- 	</select> -->
+	
+<!-- 	<insert id="insertMember" parameterType="member"> -->
+<!-- 		insert into member( -->
+<!-- 			id -->
+<!-- 		    ,pwd -->
+<!-- 		    ,email -->
+<!-- 		    ,phone -->
+<!-- 		)values( -->
+<!-- 		  #{id} -->
+<!-- 		  ,#{pwd} -->
+<!-- 		  ,#{email} -->
+<!-- 		  ,#{phone} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
+<!-- 	<update id="updateMember" parameterType="member"> -->
+<!-- 		update member set -->
+<!-- 		    pwd = #{pwd} -->
+<!-- 		    ,email = #{email} -->
+<!-- 		    ,phone = #{phone} -->
+<!-- 		where id = #{id} -->
+<!-- 	</update> -->
+	
+<!-- 	<delete id="deleteMemberById" parameterType="str"> -->
+<!-- 		delete  -->
+<!-- 		from member  -->
+<!-- 		where id = #{id} -->
+<!-- 	</delete> -->
+	
+</mapper>

@@ -4,10 +4,16 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONResolver {
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(JSONResolver.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(JSONResolver.class);
+	
 	public static void view(HttpServletResponse response, Object target) throws Exception{
+		INFO_LOGGER.info("■■■JSONResolver view init■■■");
 		// 출력
 		ObjectMapper mapper = new ObjectMapper();
 		

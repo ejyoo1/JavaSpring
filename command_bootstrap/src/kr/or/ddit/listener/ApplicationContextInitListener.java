@@ -10,26 +10,31 @@ import javax.servlet.ServletContextListener;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import kr.or.ddit.context.ApplicationContext;
+import kr.or.ddit.controller.ViewResolver;
 
 public class ApplicationContextInitListener implements ServletContextListener {
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(ApplicationContextInitListener.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(ApplicationContextInitListener.class);
 
     public void contextInitialized(ServletContextEvent ctxEvent)  { 
+    	INFO_LOGGER.info("■■■ApplicationContextInitListener contextInitialized■■■");
     	ServletContext ctx = ctxEvent.getServletContext();
     	
     	String beanConfigXml = ctx.getInitParameter("contextConfigLocation");
+    	INFO_LOGGER.info("beanConfigXml : " + beanConfigXml);
     	
     	if(beanConfigXml == null) return;
     	
     	beanConfigXml = ctx.getRealPath("/")
     			+ beanConfigXml.replace("classpath:", "WEB-INF/classes/").replace("/", File.separator);
-    	
-    	System.out.println(beanConfigXml);
+    	INFO_LOGGER.info("beanConfigXml : " + beanConfigXml);
     	
     	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); // 팩토리 객체를 생성
     	
@@ -50,15 +55,12 @@ public class ApplicationContextInitListener implements ServletContextListener {
     				String id = ele.getAttribute("id");
     				String classType = ele.getAttribute("class");
     				
-    				// System.out.printf("id : %s, class=%s\n", id, classType);
-    				
     				// map instance put
     				Class<?> cls = Class.forName(classType);
     				Object targetObj = cls.newInstance(); // single tone
     				
     				applicationContext.put(id, targetObj);
-    				
-    				// System.out.printf("id : %s, class=%s\n", id, classType);
+    				INFO_LOGGER.info("id : " + id + ", classType : " + classType);
     			}
     		}
     		
@@ -76,22 +78,22 @@ public class ApplicationContextInitListener implements ServletContextListener {
     						 String name = ele.getAttribute("name");
     						 String ref = ele.getAttribute("ref-value");
     						 
-    						 // System.out.printf("name = %s, ref-value=%s\n", name, ref);
+    						 INFO_LOGGER.info("name : " + name + ", ref : " + ref);
     						 
     						 String setMethodName = "set" + name.substring(0,1).toUpperCase()
     								 + name.substring(1);
+    						 INFO_LOGGER.info("setMethodName : " + setMethodName);
     						 
     						 String className = eleBean.getAttribute("class");
+    						 INFO_LOGGER.info("className : " + className);
     						 Class<?> classType = Class.forName(className);
-    						 
     						 Method[] methods = classType.getMethods(); // setMethod
-    						 
     						 for(Method method : methods) { // 리플렉션 (변수 호출 X 직접 하기)
     							 // System.out.println("[method.getName()]"+method.getName());
     							 if(method.getName().equals(setMethodName)) { // 메서드 체이닝
     								 method.invoke(applicationContext.get(eleBean.getAttribute("id")),
     										 applicationContext.get(ref));
-    								 System.out.println("[■■■■■■■invoke]"
+    								 INFO_LOGGER.info("[invoke]"
     										 + applicationContext.get(eleBean.getAttribute("id"))
     										 + ":" + applicationContext.get(ref));
     							 }
@@ -106,7 +108,7 @@ public class ApplicationContextInitListener implements ServletContextListener {
     }
 	
     public void contextDestroyed(ServletContextEvent ctxEvent)  { 
-    	
+    	INFO_LOGGER.info("contextDestroyed init");
     }
     
 }

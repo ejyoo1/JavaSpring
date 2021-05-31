@@ -11,48 +11,10 @@
 		where id = #{id}
 	</select>
 	
-	<!-- 멤버 목록 -->
 	<select id="selectMemberList" resultType="member">
-		select id id
-		    ,pwd pwd
-		    ,email email
-		    ,picture picture
-		    ,enabled enabled
-		    ,regDate regDate
-		    ,phone phone
-		    ,name name
-		    ,register register
-		    ,address address
-		    ,authority authority
+		select 
+		*
 		from member
 	</select>
-	
-	<insert id="insertMember" parameterType="member">
-		insert into member(
-			id
-		    ,pwd
-		    ,email
-		    ,phone
-		)values(
-		  #{id}
-		  ,#{pwd}
-		  ,#{email}
-		  ,#{phone}
-		)
-	</insert>
-	
-	<update id="updateMember" parameterType="member">
-		update member set
-		    pwd = #{pwd}
-		    ,email = #{email}
-		    ,phone = #{phone}
-		where id = #{id}
-	</update>
-	
-	<delete id="deleteMemberById" parameterType="str">
-		delete 
-		from member 
-		where id = #{id}
-	</delete>
 	
 </mapper>

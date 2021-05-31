@@ -11,70 +11,10 @@
 		where id = #{id}
 	</select>
 	
-	<!-- 멤버 목록 -->
 	<select id="selectMemberList" resultType="member">
-		select id id
-		    ,pwd pwd
-		    ,email email
-		    ,picture picture
-		    ,enabled enabled
-		    ,regDate regDate
-		    ,phone phone
-		    ,name name
-		    ,register register
-		    ,address address
-		    ,authority authority
+		select 
+		*
 		from member
 	</select>
-	
-	<insert id="insertMemberByInfo" parameterType="member">
-		insert into member(
-				id id
-		    ,pwd pwd
-		    ,email email
-		    ,picture picture
-		    ,enabled enabled
-		    ,regDate regDate
-		    ,phone phone
-		    ,name name
-		    ,register register
-		    ,address address
-		    ,authority authority
-		)values(
-		  #{id}
-		  ,#{pwd}
-		  ,#{email}
-		  ,#{picture}
-		  ,#{enabled}
-		  ,#{regDate}
-		  ,#{phone}
-		  ,#{name}
-		  ,#{register}
-		  ,#{address}
-		  ,#{authority}
-		)
-	</insert>
-	
-	<update id="updateMemberByInfo" parameterType="member">
-		update member set
-		  	id = #{id}
-		    ,pwd = #{pwd}
-		    ,email = #{email}
-		    ,picture = #{picture}
-		    ,enabled = #{enabled}
-		    ,regDate = #{regDate}
-		    ,phone = #{phone}
-		    ,name = #{name}
-		    ,register = #{register}
-		    ,address = #{address}
-		    ,authority = #{authority}
-		where id = #{id}
-	</update>
-	
-	<delete id="deleteMemberById" parameterType="str">
-		delete 
-		from member 
-		where id = #{id}
-	</delete>
 	
 </mapper>
