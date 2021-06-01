@@ -5,16 +5,21 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
+import kr.or.ddit.controller.FrontServlet;
 import kr.or.ddit.controller.JSONResolver;
 import kr.or.ddit.dto.MenuVO;
 import kr.or.ddit.service.MenuService;
 
 public class SubMenuHandler implements Handler {
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(SubMenuHandler.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(SubMenuHandler.class);
 	
 	private MenuService menuService;
 	public void setMenuService(MenuService menuService) {
 		this.menuService = menuService;
-		System.out.println("■■■■■" + menuService);
+		INFO_LOGGER.info("■■■setMenuService 의존주입 실행■■■");
 	}
 
 

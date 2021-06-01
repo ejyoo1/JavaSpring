@@ -31,7 +31,12 @@ public class MemberListPageHandler implements Handler {
 		cri.setPage(pageParam);
 		cri.setPerPageNum(perPageNumParam);
 		
-		List<MemberVO> memberList = memberService.getMemberList(cri);
+		List<MemberVO> memberList = null;
+		try{
+			memberList = memberService.getMemberList(cri);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("memberList", memberList);
 		return url; 

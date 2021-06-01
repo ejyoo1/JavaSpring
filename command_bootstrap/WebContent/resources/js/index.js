@@ -1,6 +1,7 @@
 /**
- * 
- */function subMenu(mcode){
+ * index 페이지에서 필요한 js
+ */
+function subMenu(mcode){
 	if(mcode != "M000000"){
 		$.getJSON("/subMenu.do?mCode="+mcode,function(data){
 			//console.log(data);
@@ -39,7 +40,7 @@ function goPage(url,mCode){
 		location.hash = "#"+mCode;
 	}
 	
-	alert(url);
+//	alert(url);
 	$('iframe[name="ifr"]').attr("src",url);
 }
 

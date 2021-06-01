@@ -79,6 +79,7 @@ public class FrontServlet extends HttpServlet {
 					if(view != null) ViewResolver.view(request, response, view);
 				} catch (Exception e) { // 핸들러에서 Exception 터질 시 500에러 발생
 					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					e.printStackTrace();
 				}
 				
 			} else {
