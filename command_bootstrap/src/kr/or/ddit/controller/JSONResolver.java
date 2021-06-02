@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JSONResolver {
+public class JSONResolver { // java 오브젝트를 json 형태로 바꾸는 (시리얼라이즈)
 	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(JSONResolver.class);
 	private static final Logger INFO_LOGGER = Logger.getLogger(JSONResolver.class);
 	

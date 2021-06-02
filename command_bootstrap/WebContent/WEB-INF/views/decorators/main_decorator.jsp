@@ -15,7 +15,7 @@
 <body class="hold-transition sidebar-mini" onload="init();"><!-- onload는 최소화.. sitemesh를 써야하기때문에 어쩔수없이 사용.. window onload function은 한번밖에 사용못함 두번이상이면 작동 안함. -->
 	<div class="wrapper">
 
-	<decorator:body /><!-- htmlParser에 의해서 원본에 있던 body를 붙임 -->
+		<decorator:body /><!-- htmlParser에 의해서 원본에 있던 body를 붙임 -->
 	</div>
 	<%@ include file="/WEB-INF/views/include/js.jsp" %>
 </body>
