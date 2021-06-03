@@ -15,7 +15,6 @@ public class MainMenuHandler implements Handler {
 	
 	public void setMenuService(MenuService menuService) {
 		this.menuService = menuService;
-		System.out.println("1");
 	}
 
 

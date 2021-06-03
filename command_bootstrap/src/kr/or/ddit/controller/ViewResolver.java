@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-public class ViewResolver { // 해결사 JSP 포워딩, 리다이렉트
+public class ViewResolver { // JSP 포워딩, 리다이렉트
 	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(ViewResolver.class);
 	private static final Logger INFO_LOGGER = Logger.getLogger(ViewResolver.class);
 	

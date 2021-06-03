@@ -83,7 +83,7 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${memberList}" var="member">
-									<tr>
+									<tr onclick="OpenWindow('detail.do?id=${member.id}','','800','900');" style="cursor:pointer;">
 										<td>${member.id}</td>
 										<td>${member.pwd}</td>
 										<td>${member.email}</td>

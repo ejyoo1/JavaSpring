@@ -63,9 +63,9 @@ public class MemberDAOImpl implements MemberDAO {
 		count = session.selectOne("Member-Mapper.selectSearchMemberListCount",cri);
 		return count;
 	}
-	
 
-	
-	
-
+	@Override
+	public void insertMember(SqlSession session, MemberVO member) throws SQLException {
+		session.update("Member-Mapper.insertMember",member);
+	}
 }

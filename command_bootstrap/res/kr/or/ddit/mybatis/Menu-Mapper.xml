@@ -44,4 +44,10 @@
 		WHERE MCODE = #{MCODE}
 	</select>
 	
+	<select id="selectMenuByMname" resultType="menu">
+		select *
+		from menu
+		where mName = #{mName}
+	</select>
+	
 </mapper>

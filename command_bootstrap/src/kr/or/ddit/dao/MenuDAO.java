@@ -15,6 +15,9 @@ public interface MenuDAO {
 	// 서브메뉴
 	List<MenuVO> selectSubMenu(SqlSession session, String mCode) throws SQLException;
 	
-	//메뉴 정보
+	//메뉴 정보 = mCode
 	MenuVO selectMenuByMcode(SqlSession session, String mCode) throws SQLException;
+	
+	// 메뉴 정보 = mName
+	MenuVO selectMenuByMname(SqlSession session, String mName) throws SQLException;
 }

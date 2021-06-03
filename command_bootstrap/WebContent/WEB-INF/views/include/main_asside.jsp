@@ -20,6 +20,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+        	<img src="/member/getPicture.do?picture=${loginUser.picture}" class="img-circle elevation-2" alt="User Image">	
         </div>
         <div class="info">
          	<div class="row">
@@ -28,7 +29,7 @@
          				class="btn btn-xs btn-primary col-xs-3" type="button">LOGOUT</button>
          	</div>
          	<a href="tel:${loginUser.phone}">tel : ${loginUser.phone}</a><br/>
-         	<a href="mailto:${loginUser.email}">email : ${loginUser.email}</a>
+         	<a href="mailto:${loginUser.email}">email : ${loginUser.email}</a><br/>
         </div>
       </div>
 

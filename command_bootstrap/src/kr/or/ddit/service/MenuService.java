@@ -12,4 +12,6 @@ public interface MenuService {
 	List<MenuVO> getSubMenuList(String mCode) throws SQLException;
 	
 	MenuVO getMenuByMcode(String mCode) throws SQLException;
+	
+	MenuVO getMenuByMname(String mName) throws SQLException;
 }

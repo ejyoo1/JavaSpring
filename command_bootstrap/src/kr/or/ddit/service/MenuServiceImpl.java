@@ -16,7 +16,6 @@ public class MenuServiceImpl implements MenuService {
 	private MenuDAO menuDAO;// = new MenuDAOImpl(); 의존 주입
 	public void setMenuDAO(MenuDAO menuDAO) {
 		this.menuDAO = menuDAO;
-		System.out.println("★★★★★"+menuDAO);
 	}
 	
 
@@ -66,6 +65,17 @@ public class MenuServiceImpl implements MenuService {
 		session.close();
 		
 		// 출력
+		return menu;
+	}
+
+	@Override
+	public MenuVO getMenuByMname(String mName) throws SQLException {
+		MenuVO menu = null;
+		
+		SqlSession session = sqlSessionFactory.openSession();
+		menu = menuDAO.selectMenuByMname(session, mName);
+		session.close();
+		
 		return menu;
 	}
 

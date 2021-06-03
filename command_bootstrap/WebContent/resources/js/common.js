@@ -39,14 +39,26 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight){
 	win.focus();
 }
 
-// 팝업창 닫기
-function CloseWindow(){
-	window.opener.location.reload(true);
-	window.close();
-}
+//// 팝업창 닫기
+//function CloseWindow(){
+//	window.opener.location.reload(true);
+//	window.close();
+//}
 
 // 팝업창 닫고 부모창 이동
 function CloseWindow(parentURL){
-	window.opener.parent.location.href = parentURL;
+	if(parentURL){
+		window.opener.parent.location.href = parentURL;
+	} else {
+		window.opener.location.reload(true);
+	}
 	window.close();
+}
+
+// 사용자 사진 미리보기
+function MemberPictureThumb(targetObj, fileName){ // (대상, 이미지파일명)
+	targetObj.style.backgroundImage = "url('getPicture.do?picture="+ fileName +"')";// 상대경로 || 절대경로 : member/getPicture.do
+	targetObj.style.backgroundPosition = "center";
+	targetObj.style.backgroundRepeat = "no-repeat";
+	targetObj.style.backgroundSize = "cover"; // cover : 꽉차지만 잘림 , contain : 딱맞지만 여백생성 // cover인 경우 backgroundPosition = "center" 를 해야 가운데 기준으로 잘림. // 때에 따라 top left|right / bottom left|right 사용 가능
 }

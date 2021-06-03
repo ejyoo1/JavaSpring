@@ -63,7 +63,6 @@ public class LoginCheckFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 		String excludeURLNames = fConfig.getInitParameter("exclude"); // xml 에서 설정한 login,resources
-		System.out.println(excludeURLNames);
 		StringTokenizer st = new StringTokenizer(excludeURLNames, ",");
 		while(st.hasMoreTokens()) {
 			exURLs.add(st.nextToken().trim()); // xml에 혹시나 존재할 공백을 제거

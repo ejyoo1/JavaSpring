@@ -44,7 +44,7 @@
                            onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
                         type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
                         <span class="input-group-append-sm">   
-                           <button type="button" onclick=""  class="btn btn-info btn-sm btn-append">중복확인</button>
+                           <button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append">중복확인</button>
                         </span>                        
                      </div>                        
                   </div>
@@ -105,11 +105,11 @@
                   <div class="card-footer">
                      <div class="row">                        
                         <div class="col-sm-6">
-                           <button type="button" id="registBtn" onclick="" class="btn btn-info">가입하기</button>
+                           <button type="button" id="registBtn" onclick="regist_go();" class="btn btn-info">가입하기</button>
                          </div>
                          
                          <div class="col-sm-6">
-                           <button type="button" id="cancelBtn" onclick="CloseWindow('/index.do?mCode=M010100')"
+                           <button type="button" id="cancelBtn" onclick="CloseWindow();"
                               class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취 &nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
                         </div>
                      
@@ -131,80 +131,11 @@
    <input type="hidden" name="checkUpload" value="0" />   
 </form>
 
+<script src="/resources/js/member/regist.js"></script>
 <script src="/resources/js/common.js"></script>
 <script>
-var formData = "";
-function picture_go(){
-	formData = new FormData($('form[role="imageForm"]')[0]); 
-	var form = $('form[role="imageForm"]');
-	var picture = form.find('[name=pictureFile]')[0];
-	
-	// 업로드 확인 변수 초기화
-	form.find('[name="checkUpload"]').val(0);
-	var fileFormat = 
-		picture.value.substr(picture.value.lastIndexOf(".")+1).toUpperCase();
-	
-	// 이미지 확장자 jpg 확인
-	if(!(fileFormat=="JPG" || fileFormat=="JPEG")){
-		alert("이미지는 jpg/jpeg 형식만 가능합니다.");
-		picture.val("");
-		return;
-	}
-	
-	// 이미지 파일 용량 체크
-	if(picture.files[0].size>1024*1024*1){ 
-		alert("사진 용량은 1MB 이하만 가능합니다.");
-		return;
-	}
-	
-// 	alert("성공");
-	document.getElementById('inputFileName').value=picture.files[0].name; 
-	
-	if(picture.files && picture.files[0]){ 
-		var reader = new FileReader(); 
-		reader.onload = function (e) { 
-			$('div#pictureView')
-				.css({'background-image':'url('+e.target.result+')',
-							'background-position':'center',
-							'background-size':'cover',
-							'background-repeat':'no-repeat'
-						});
-		}
-		reader.readAsDataURL(picture.files[0]); 
-	}
-}
 
-function upload_go(){
-// 	alert("upload btn click");
-	if($('input[name="pictureFile"]').val()==""){
-		alert("사진을 선택하세요.");
-		$('input[name="pictureFile"]').click();
-		return;
-	}
-	
-	$.ajax({
-		url : "<%=request.getContextPath()%>/member/picture.do",
-		data : formData,
-		type : 'post',
-		processData : false,
-		contentType : false,
-		success : function(data){
-			// 업로드 확인 변수 세팅
-			$('input[name="checkUpload"]').val(1);
-			
-			// 저장된 파일명 저장.
-			$('input#oldFile').val(data); 
-			$('form[role="form"] input[name="picture"]').val(data);
-			
-			alert("사진이 업로드 되었습니다.");
-		},
-		error : function(error){
-			alert("현재 사진 업로드가 불가합니다. \n 관리자에게 연락바랍니다.");
-		}
-	});
-}
 </script>
-
 </body>
 
 
