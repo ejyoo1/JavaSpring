@@ -52,5 +52,33 @@
 		values(#{id}, #{pwd}, #{email}, #{phone}, #{picture}, #{name}, #{authority})
 	</update>
 	
+	<update id="updateMember" parameterType="member">
+		update member
+		set
+		pwd=#{pwd},email=#{email},phone=#{phone},name=#{name},
+		picture=#{picture}
+		<if test="authority != null">
+			,authority=#{authority}
+		</if>
+		where id=#{id}
+	</update>
+	
+	<update id="deleteMember" parameterType="str">
+		delete
+		from member
+		where id=#{id}
+	</update>
+	
+	<update id="disabledMember">
+		update member
+		set enabled=0
+		where id=#{id}
+	</update>
+	
+	<update id="enabledMember">
+		update member
+		set enabled=1
+		where id=#{id}
+	</update>
 	
 </mapper>

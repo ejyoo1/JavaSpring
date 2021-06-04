@@ -18,5 +18,6 @@
 		<decorator:body /><!-- htmlParser에 의해서 원본에 있던 body를 붙임 -->
 	</div>
 	<%@ include file="/WEB-INF/views/include/js.jsp" %>
+	<script src="/resources/js/common.js"></script>
 </body>
 </html>

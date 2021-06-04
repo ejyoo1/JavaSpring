@@ -127,6 +127,51 @@ public class MemberServiceImpl implements MemberService {
 			memberDAO.insertMember(session, member);
 		} catch(Exception e) {
 			e.printStackTrace();
+			throw e;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void modify(MemberVO member) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			memberDAO.updateMember(session, member);
+		} catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public void remove(String id) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			memberDAO.deleteMember(session, id);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void disabled(String id) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			memberDAO.disabledMember(session, id);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void enabled(String id) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			memberDAO.enabledMember(session, id);
 		} finally {
 			session.close();
 		}

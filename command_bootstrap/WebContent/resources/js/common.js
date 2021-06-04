@@ -50,12 +50,12 @@ function CloseWindow(parentURL){
 	if(parentURL){
 		window.opener.parent.location.href = parentURL;
 	} else {
-		window.opener.location.reload(true);
+		window.opener.parent.location.reload(true);
 	}
 	window.close();
 }
 
-// 사용자 사진 미리보기
+// 사용자 사진 미리보기 (서버 호출)
 function MemberPictureThumb(targetObj, fileName){ // (대상, 이미지파일명)
 	targetObj.style.backgroundImage = "url('getPicture.do?picture="+ fileName +"')";// 상대경로 || 절대경로 : member/getPicture.do
 	targetObj.style.backgroundPosition = "center";

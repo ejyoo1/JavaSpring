@@ -80,11 +80,12 @@
 			          		</div>
 		          		
 			          		<div class="col-sm-3 text-center">
-			          			<button type="button" onclick="location.href='remove.do?id=${member.id}" 
+			          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" 
 			          			id="deleteBtn" class="btn btn-danger" >삭 제</button>
 			          		</div>
 			          		<div class="col-sm-3 text-center">
-			          			<button type="button" id="stopBtn" class="btn btn-info" >정 지</button>
+			          			<button type="button" onclick="location.href='disabled.do?id=${member.id}';" 
+			          			id="stopBtn" class="btn btn-info" >정 지</button>
 			          		</div>
 			          	
 			          		<div class="col-sm-3 text-center">
@@ -107,5 +108,6 @@ window.onload=function(){
 		MemberPictureThumb(document.querySelector('[data-id="${member.id}"]'),'${member.picture}');
 }// 라이브러리가 들어온 후에 호출되기 위해 설정
 </script>
+
 
 </body>

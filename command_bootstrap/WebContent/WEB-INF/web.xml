@@ -58,4 +58,14 @@
     <servlet-name>FrontServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500_error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404_error.jsp</location>
+	</error-page>
 </web-app>

@@ -58,6 +58,7 @@ public class MultipartHttpServletRequestParser {
 			// 필드
 			String paramName = item.getFieldName();
 			INFO_LOGGER.info("paramName : " + paramName);
+			INFO_LOGGER.info("item.getString() : " + item.getString());
 			
 			// 일반 파라미터이면 K,V 삽입(Multipart는 key하나에 value가 ','를 구분자로 가지고 있음.)
 			if(item.isFormField()) {

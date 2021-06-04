@@ -25,5 +25,17 @@ public interface MemberService {
 	Map<String,Object> getMemberList(SearchCriteria cri) throws SQLException; // 검색 목록
 	
 	// 회원 등록
-	public void regist(MemberVO member) throws SQLException;
+	void regist(MemberVO member) throws SQLException;
+	
+	// 회원 수정
+	void modify(MemberVO member) throws SQLException;
+	
+	// 회원 삭제
+	void remove(String id) throws SQLException;
+	
+	// 회원 정지
+	void disabled(String id) throws SQLException;
+	
+	// 
+	void enabled(String id) throws SQLException;
 }
