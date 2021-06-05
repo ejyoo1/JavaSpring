@@ -12,6 +12,7 @@
 // page : page 번호, url : list url
 // copyright 유은지 2021.06.01 ing~~~~
 function list_go(page, url) {// 페이지 상태 유지 부분
+	alert("page : " + page);
 	if(!url) url = "list.do"; // url이 없는 경우 처리 ==> '!url' : url이 없으면(사전 방지)
 	
 	var jobForm = $('#jobForm');
