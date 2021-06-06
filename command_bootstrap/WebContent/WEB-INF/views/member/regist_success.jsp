@@ -20,7 +20,7 @@
 				window.close();
 			},
 			error : function(error){
-				alert("시스템 장애로 회원등록에 실패했습니다. \n 관리자에게 연락바랍니다.");
+				alert("시스템 장애가 발생하였습니다. \n 관리자에게 연락바랍니다.");
 				window.opener.history.go(-1);
 			}
 		});
