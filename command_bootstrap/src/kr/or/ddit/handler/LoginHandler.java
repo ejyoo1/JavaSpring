@@ -41,6 +41,7 @@ public class LoginHandler implements Handler {
          
       } catch (Exception e) {
     	  e.printStackTrace();
+    	  throw e;
       }
       return url;
    }

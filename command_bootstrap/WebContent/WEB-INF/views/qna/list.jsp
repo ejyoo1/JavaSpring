@@ -4,6 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="pageMaker" value="${dataMap.pageMaker}" />
+<c:set var="cri" value="${dataMap.pageMaker.cri}" />
+<c:set var="qnaList" value="${dataMap.qnaList}" />
+
 <head></head>
 
 <title>질문목록</title>
@@ -36,21 +40,21 @@
     <section class="content">		
 		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">공지등록</button>				
+				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','공지등록',800,700);">질문등록</button>				
 				<div id="keyword" class="card-tools" style="width:450px;">
 					<div class="input-group row">
 						<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
 					  		onchange="list_go();">
 					  		<option value="10" >정렬개수</option>
-					  		<option value="20" ${2 == 2 ? 'selected':''}>2개씩</option><!-- cri.perPageNum -->
-					  		<option value="50" ${5 == 5 ? 'selected':''}>5개씩</option>
-					  		<option value="100" ${10 == 10 ? 'selected':''}>10개씩</option>
+					  		<option value="20" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option><!-- cri.perPageNum -->
+					  		<option value="50" ${cri.perPageNum == 5 ? 'selected':''}>5개씩</option>
+					  		<option value="100" ${cri.perPageNum == 10 ? 'selected':''}>10개씩</option>
 					  		
 					  	</select>						
 						<select class="form-control col-md-4" name="searchType" id="searchType">
-							<option value="tcw"  ${'tw' eq 'tw' ? 'selected':'' }>전 체</option><!-- cri.searchType -->
-							<option value="t" ${'t' eq 't' ? 'selected':'' }>제 목</option>
-							<option value="w" ${'w' eq 'w' ? 'selected':'' }>작성자</option>
+							<option value="tcw"  ${cri.searchType eq 'tw' ? 'selected':'' }>전 체</option><!-- cri.searchType -->
+							<option value="t" ${cri.searchType eq 't' ? 'selected':'' }>제 목</option>
+							<option value="w" ${cri.searchType eq 'w' ? 'selected':'' }>작성자</option>
 						</select>					
 						<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${param.keyword }"/>
 						<span class="input-group-append">
@@ -70,48 +74,36 @@
 						<th style="width:15%;">작성자</th>
 						<th>등록일</th>
 						<th style="width:10%;">조회수</th>
-					</tr>				
+					</tr>		
+					<c:if test="${empty qnaList}">		
 						<tr>
 							<td colspan="5">
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
+					</c:if>
+					<c:forEach items="${qnaList}" var="qna">
 						<tr style='font-size:0.85em;'>
 							<td>1</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 												white-space: nowrap; text-overflow: ellipsis;">
 												
-							<a href="javascript:OpenWindow('detail.do?nno=1','상세보기',800,700);">
-								title							
+							<a href="javascript:OpenWindow('detail.do?qno=1','상세보기',800,700);">
+								${qna.title}      						
 							</a>
 							</td>
-							<td>writer</td>
+							<td>${qna.writer}</td>
 							<td>
-								1993-12-06
+								<fmt:formatDate value="${qna.regdate}" pattern="yyyy-MM-dd" />
 							</td>
-							<td><span class="badge bg-red">viewcnt</span></td>
+							<td><span class="badge bg-red">${qna.viewcnt}</span></td>
 						</tr>
-						
-						<tr style='font-size:0.85em;'>
-							<td>1</td>
-							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
-												white-space: nowrap; text-overflow: ellipsis;">
-												
-							<a href="javascript:OpenWindow('detail.do?nno=1','상세보기',800,700);">
-								title		<span class="badge bg-success">답변완료</span>					
-							</a>
-							</td>
-							<td>writer</td>
-							<td>
-								1993-12-06
-							</td>
-							<td><span class="badge bg-red">viewcnt</span></td>
-						</tr>
-						
+					</c:forEach>
+<!-- 					<span class="badge bg-success">답변완료</span>    -->
 				</table>				
 			</div>
 			<div class="card-footer">
-<%-- 				<%@ include file="/WEB-INF/views/common/pagingtion.jsp" %> --%>
+				<%@ include file="/WEB-INF/views/common/pagingtion.jsp" %>
 			</div>
 		</div>
 		

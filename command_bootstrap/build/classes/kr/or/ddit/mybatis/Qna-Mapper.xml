@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="QnA-Mapper">
+<mapper namespace="Qna-Mapper">
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
 			and title like '%'||#{keyword}||'%'
@@ -10,11 +10,60 @@
 		<if test="searchType == 'w'.toString()">
 			and writer like '%'||#{keyword}||'%'
 		</if>
-		<if test="searcyType == 'c'.toString()">
+		<if test="searchType == 'c'.toString()">
 			and content like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'tc'.toString()">
-		
+		  and (
+		  title like '%'||#{keyword}||'%'
+		  or
+		  content like '%'||#{keyword}||'%'
+		  )		  
 		</if>
+		<if test="searchType == 'tcw'.toString()">
+      and (
+      title like '%'||#{keyword}||'%'
+      or
+      writer like '%'||#{keyword}||'%'
+      or
+      content like '%'||#{keyword}||'%'
+      )
+    </if>
 	</sql>
+	
+	<select id="selectSearchQnaList" resultType="qna">
+	 select
+	 *
+	 from qna
+	 where qno is not null
+	 <include refid="search" />
+	 order by regDate desc
+	</select>
+	<select id="selectSearchQnaListCount" resultType="int">
+    select
+    count(*)
+    from qna
+    where qno is not null
+    <include refid="search" />
+    order by regDate desc
+  </select>
+  
+  <select id="selectQnaByNno" parameterType="int" resultType="qna">
+    select
+    *
+    from qna
+    where qno=#{qno}
+  </select>
+  
+  <update id="increaseViewCount" parameterType="int"><!-- detail 할 때 -->
+    update qna
+    set viewcnt=viewcnt+1
+    where qno=#{qno}
+  </update>
+  
+  <update id="insertNotice" parameterType="notice">
+    insert into
+    qna(qno, title, writer, content)
+    values(#{qno},#{title},#{writer},#{content})
+  </update>
 </mapper>

@@ -76,6 +76,10 @@ public class HandlerMapper {
 				INFO_LOGGER.info("문법적 오류가 발생하였습니다.");
 				e.printStackTrace();
 				throw e;
+			} catch (Exception e) {
+				INFO_LOGGER.info("처리되지 않은 오류 발생함.");
+				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
