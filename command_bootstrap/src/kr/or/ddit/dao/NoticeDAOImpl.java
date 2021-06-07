@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.ddit.command.Criteria;
+import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.NoticeVO;
 
 public class NoticeDAOImpl implements NoticeDAO{
@@ -15,11 +16,34 @@ public class NoticeDAOImpl implements NoticeDAO{
 	private static final Logger INFO_LOGGER = Logger.getLogger(MemberDAOImpl.class);
 	
 	@Override
-	public List<NoticeVO> selectNoticeList(SqlSession session, String nno) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<NoticeVO> selectSearchNoticeList(SqlSession session, SearchCriteria cri) throws SQLException {
+
+		int offset = cri.getStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		List<NoticeVO> noticeList = 
+				session.selectList("Notice-Mapper.selectSearchNoticeList", cri, rowBounds);
+		
+		return noticeList;
 	}
-
-	
-
+	@Override
+	public int selectSearchNoticeListCount(SqlSession session, SearchCriteria cri) throws SQLException {
+		int count = session.selectOne("Notice-Mapper.selectSearchNoticeListCount", cri);
+		return count;
+	}
+	@Override
+	public NoticeVO selectNoticeByNno(SqlSession session, int nno) throws SQLException {
+		NoticeVO notice = session.selectOne("Notice-Mapper.selectNoticeByNno", nno);
+		return notice;
+	}
+	@Override
+	public void increaseViewCount(SqlSession session, int nno) throws SQLException {
+		session.update("Notice-Mapper.increaseViewCount", nno);
+	}
+	@Override
+	public int selectNoticeSequenceNextValue(SqlSession session) throws SQLException {
+		int seq_num = session.update("Notice-Mapper.insertNotice");
+		return seq_num;
+	}
 }

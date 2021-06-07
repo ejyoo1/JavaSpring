@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import kr.or.ddit.dto.MenuVO;
 
-public class TestMenuService {
+public class TestMenuService { // DAO가 없어서 MockDAO를 만들어 활용
 	private MenuServiceImpl service;
 	
 	@Before

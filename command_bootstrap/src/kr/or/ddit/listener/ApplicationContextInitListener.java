@@ -23,7 +23,7 @@ public class ApplicationContextInitListener implements ServletContextListener {
 	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(ApplicationContextInitListener.class);
 	private static final Logger INFO_LOGGER = Logger.getLogger(ApplicationContextInitListener.class);
 
-    public void contextInitialized(ServletContextEvent ctxEvent)  { 
+    public void contextInitialized(ServletContextEvent ctxEvent)  { // 조립해주는 부분
     	INFO_LOGGER.info("■■■ApplicationContextInitListener contextInitialized■■■");
     	ServletContext ctx = ctxEvent.getServletContext();
     	

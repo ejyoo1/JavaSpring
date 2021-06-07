@@ -3,17 +3,12 @@ package kr.or.ddit.dto;
 import java.util.Date;
 
 public class NoticeVO {
-	private int nno;
-	private String title;
-	private String writer;
-	private String content;
-	private Date regdate;
-	private int viewcnt;
-	private int point;
-	private Date startdate;
-	private Date enddate;
-	private Date updatedate;
-	private String dist;
+	private int nno; // 게시판 번호
+	private String title; // 제목
+	private String writer; // 작성자 (회원)
+	private String content; // 내용 (html)
+	private int viewcnt; // 조회수
+	private Date regdate; // 등록날짜
 	
 	public int getNno() {
 		return nno;
@@ -39,48 +34,16 @@ public class NoticeVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
-	}
 	public int getViewcnt() {
 		return viewcnt;
 	}
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	public int getPoint() {
-		return point;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setPoint(int point) {
-		this.point = point;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
-	public Date getStartdate() {
-		return startdate;
-	}
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
-	public Date getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-	public Date getUpdatedate() {
-		return updatedate;
-	}
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
-	}
-	public String getDist() {
-		return dist;
-	}
-	public void setDist(String dist) {
-		this.dist = dist;
-	}
-	
-	
 }
