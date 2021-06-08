@@ -22,4 +22,11 @@ public interface NoticeDAO {
 	
 	// Notice seq.nextval 가져오기
 	int selectNoticeSequenceNextValue(SqlSession session) throws SQLException;
+	
+	void insertNotice(SqlSession session, NoticeVO notice) throws SQLException;
+	
+	void updateNotice(SqlSession session, NoticeVO notice) throws SQLException;
+	
+	void deleteNotice(SqlSession session, int nno) throws SQLException;
+	
 }

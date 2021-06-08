@@ -43,7 +43,21 @@ public class NoticeDAOImpl implements NoticeDAO{
 	}
 	@Override
 	public int selectNoticeSequenceNextValue(SqlSession session) throws SQLException {
-		int seq_num = session.update("Notice-Mapper.insertNotice");
+		int seq_num = session.selectOne("Notice-Mapper.selectNoticeSequenceNextValue");
 		return seq_num;
+	}
+	@Override
+	public void insertNotice(SqlSession session, NoticeVO notice) throws SQLException {
+		session.update("Notice-Mapper.insertNotice", notice);
+	}
+	@Override
+	public void updateNotice(SqlSession session, NoticeVO notice) throws SQLException {
+		session.update("Notice-Mapper.updateNotice", notice);
+		
+	}
+	@Override
+	public void deleteNotice(SqlSession session, int nno) throws SQLException {
+		session.update("Notice-Mapper.deleteNotice", nno);
+		
 	}
 }

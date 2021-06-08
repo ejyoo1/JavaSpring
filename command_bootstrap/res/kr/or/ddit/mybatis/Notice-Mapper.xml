@@ -72,4 +72,17 @@
 		values(#{nno},#{title},#{writer},#{content})
 	</update>
 	
+	<update id="updateNotice" parameterType="notice">
+      update notice
+      set title = #{title}
+        , content = #{content}
+      where nno = #{nno}
+   </update>
+	
+	<update id="deleteNotice" parameterType="int">
+		delete
+		from notice
+		where nno=#{nno}
+	</update>
+	
 </mapper>

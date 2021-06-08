@@ -88,4 +88,36 @@ public class NoticeServiceImpl implements NoticeService{
 	      }
 	      return notice;
 	}
+
+	@Override
+	public void regist(NoticeVO notice) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			int nno = noticeDAO.selectNoticeSequenceNextValue(session);
+			notice.setNno(nno);
+			noticeDAO.insertNotice(session, notice);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void modify(NoticeVO notice) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			noticeDAO.updateNotice(session, notice);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void remove(int nno) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			noticeDAO.deleteNotice(session, nno);
+		} finally {
+			session.close();
+		}
+	}
 }

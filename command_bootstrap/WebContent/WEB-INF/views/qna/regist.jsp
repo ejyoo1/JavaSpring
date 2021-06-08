@@ -5,145 +5,131 @@
 
 <title>질문등록</title>
 
-<body>
+<section class="content-header">
+	<div class="container-fluid">
+		<div class="row md-2">
+			<div class="col-sm-6">
+				<h1>Qna</h1>
+			</div><!-- ./col-sm-6 -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item">
+						<a href="list.do">
+							<i class="fa fa-dashboard"></i>Qna
+						</a>
+					</li>
+					<li class="breadcrumb-item active">
+					등록
+					</li>
+				</ol>
+			</div><!-- ./col-sm-6 -->
+		</div><!-- ./row md-2 -->
+	</div><!-- ./container-fluid -->
+</section>
+<!-- Main content -->
+<section class="content container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-9" style="max-width:960px;">
+			<div class="card card-outline card-primary">
+				<div class="card-header">
+					<h3 class="card-title p-1">Qna등록</h3>
+					<div class="card-tools">
+						<button type="button" class="btn btn-primary" id="registBtn" onclick="regist_go();">등록</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-primary" id="cancelBtn" onclick="CloseWindow();">취소</button>
+					</div><!-- ./card-tools -->
+				</div><!-- ./card-header -->
+				<div class="card-body pad">
+					<form role="form" method="post" action="regist.do" name="registForm">
+						<div class="form-group">
+							<label for="title">제목</label>
+							<input type="text" id="title" name="title" class="form-control" placeholder="제목을 쓰세요" />
+						</div><!-- ./form-group -->
+						
+						<div class="form-group">
+							<label for="writer">작성자</label>
+							<input type="text" id="writer" 
+										 name="writer" class="form-control" value="${loginUser.id}" readonly />
+						</div><!-- ./form-group -->
+						
+						<div class="form-group">
+							<label for="content">내용</label>
+							<textarea class="textarea" name="content" id="content" rows="20" placeholder="1000자 내외로 작성하세요."
+							          style="display: none;"></textarea>
+						</div><!-- ./form-group -->
+					</form>
+				</div><!-- ./card-body pad -->
+				<div class="card-footer" style="display:none">
+				</div><!-- ./card-footer -->
+			</div><!-- ./card card-outline card-info -->
+		</div><!-- ./col-md-9 -->
+	</div><!-- ./row justify-content-center -->
+</section>
 
-   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" >
-  
-   <!-- Main content -->
-   <section class="content register-page">
-      <div class="register-box">
-         <div class="login-logo">
-             <a href="<%=request.getContextPath()%>/qna/registForm.do"><b>질문 등록</b></a>
-           </div>
-         <!-- form start -->
-         <div class="card">            
-            <div class="register-card-body">
-               <form role="form" class="form-horizontal" action="regist.do" method="post">                  
-                  <input type="hidden" name="picture" />
-                  <div class="input-group mb-3">
-                     <div class="mailbox-attachments clearfix" style="text-align: center;">
-<!--                         <div class="mailbox-attachment-icon has-img" id="pictureView" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto;"></div> -->
-                        <div class="mailbox-attachment-info">
-                           <div class="input-group input-group-sm">
-                              <label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon">파일선택</label><!-- 버튼 효과를 내줌 -->
-                              <input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled/>
-                              <span class="input-group-append-sm">                                 
-                                 <button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();">업로드</button>                                 
-                              </span>
-                           </div>
-                        </div>
-                     </div>
-                     <br />
-                    </div>   
-                    <div class="form-group row">
-                      <label for="id" class="col-sm-3" style="font-size:0.9em;" >
-                         <span style="color:red;font-weight:bold;">*</span>아이디</label>   
-                     <div class="col-sm-9 input-group input-group-sm">
-                        <input name="id" 
-                           onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
-                        type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
-                        <span class="input-group-append-sm">   
-                           <button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append">중복확인</button>
-                        </span>                        
-                     </div>                        
-                  </div>
-                  <div class="form-group row">
-                     <label for="pwd" class="col-sm-3" style="font-size:0.9em;">
-                        <span style="color:red;font-weight:bold;">*</span>패스워드</label>
-                     <div class="col-sm-9 input-group-sm">                        
-                        <input class="form-control" name="pwd" type="password" class="form-control" id="pwd"
-                              placeholder="20글자 영문자,숫자,특수문자 조합" />
-                     </div>
-                     
-                  </div>
-                  <div class="form-group row">
-                     <label for="name" class="col-sm-3" style="font-size:0.9em;">
-                        <span style="color:red;font-weight:bold;">*</span>이 름</label>
-                     <div class="col-sm-9 input-group-sm">                        
-                        <input class="form-control" name="name" type="text" class="form-control" id="name"
-                              placeholder="이름을 입력하세요" />
-                     </div>
-                     
-                  </div>      
-                  <div class="form-group row">
-                     <label for="authority" class="col-sm-3" style="font-size:0.9em;" >권 한</label>
-                     <div class="col-sm-9">
-                        <select name="authority" class="form-control" style="font-size:0.9em;">
-                           <option value="ROLE_USER">사용자</option>
-                           <option value="ROLE_MANAGER">운영자</option>
-                           <option value="ROLE_ADMIN">관리자</option>
-                        </select>
-                     </div>
-                  </div>               
-                  <div class="form-group row">
-                     <label for="email" class="col-sm-3" style="font-size:0.9em;">이메일</label>
-                     <div class="col-sm-9 input-group-sm">
-                        <input name="email" type="email" class="form-control" id="email"
-                              placeholder="example@naver.com">
-                     </div>
-                  </div>
-                  <div class="form-group row">
-                     <label for="phone" class="col-sm-3 control-label">전화번호</label>
-                     <div class="col-sm-9">   
-                        <div class="input-group-sm">
-                           <select style="width:75px;" name="phone" id="phone" class="form-control float-left">
-                              <option value="">-선택-</option>
-                              <option value="010">010</option>
-                              <option value="011">011</option>
-                              <option value="017">017</option>
-                              <option value="018">018</option>
-                           </select>                     
-                           <label class="float-left" style="padding: 0; text-align: center;">&nbsp;-&nbsp;</label>                              
-                           <input style="width:68px;" name="phone" type="text" class="form-control float-left" />
-                           <label class="float-left" style="padding: 0; text-align: center;">&nbsp;-</label>
-                           <input style="width:68px;" name="phone" type="text" class="form-control float-right" />                  
-                        </div>
-                     </div>
-                  </div>
-                  
-                  <div class="card-footer">
-                     <div class="row">                        
-                        <div class="col-sm-6">
-                           <button type="button" id="registBtn" onclick="regist_go();" class="btn btn-info">가입하기</button>
-                         </div>
-                         
-                         <div class="col-sm-6">
-                           <button type="button" id="cancelBtn" onclick="CloseWindow();"
-                              class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취 &nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
-                        </div>
-                     
-                     </div>
-                  </div>
-               </form>               
-            </div><!-- register-card-body -->
-         </div>
-      </div>
-   </section>      <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-
-
-<form role="imageForm" action="upload/picture.do" method="post" enctype="multipart/form-data"><!-- 화면이 새로고침되게이 submit은 불가능 -->
-<!-- 템플릿으로 인해서 Jquery가 들어오는 시기는 Jquery include 위에 들어옴.   decorator:body  ==> function call 해야 함. 또는 윈도으ㅜ 업로드 펑션쓰던가. -->
-   <input id="inputFile" name="pictureFile" type="file" class="form-control" onchange="picture_go();" style="display:none;">
-   <input id="oldFile" type="hidden" name="oldPicture" value="" />
-   <input type="hidden" name="checkUpload" value="0" />   
-</form>
-
-<script src="/resources/js/member/regist.js"></script>
-<script src="/resources/js/common.js"></script>
 <script>
+window.onload=function(){
+	Summernote_start($('#content'));
+	
+	function Summernote_start(targetObj){
+		targetObj.summernote({
+			placeholder:'여기에 내용을 적으세요.',
+			height:250,
+			disableResizeEditor:true,
+			callbacks:{
+				onImageUpload : function(files, editor, welEditable){
+					for(var file of files){
+						if(file.size > 1024*1024*5){
+							alert("이미지는 5MB 미만입니다.");
+							return;
+						}
+						if(file.name.substring(file.name.lastIndexOf(".")+1).toUpperCase() != "JPG"){
+							alert("JPG 이미지 형식만 가능합니다.");
+							return;
+						}
+					}
+					
+					for(var file of files){
+						sendFile(file,this);
+					}
+				},
+				onMediaDelete : function(target){
+					
+				}
+			}
+		});
+	}// Summernote_start
+}
 
+function sendFile(file,el){
+	var form_data = new FormData();
+	form_data.append("file",file);
+	$.ajax({
+		data : form_data,
+		type : "POST",
+		url : '<%=request.getContextPath()%>/uploadImg.do',
+		cache : false,
+		contentType : false,
+		processData : false,
+		success : function(img_url){
+			$(el).summernote('editor.insertImage',img_url);
+		},
+		error:function(){
+			alert("이미지 업로드에 실패했습니다.");
+		}
+	});
+}
+
+function regist_go(){
+	var form = document.registForm;
+	if(form.title.value==""){
+		alert("제목은 필수입니다.");
+		return;
+	}
+	if(form.content.value==""){
+		alert("내용은 필수입니다.");
+		return;
+	}
+	form.submit();
+}
 </script>
-</body>
-
-
-
-
-
-
-
-
-
 
