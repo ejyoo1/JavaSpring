@@ -6,13 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import kr.or.ddit.controller.FileUploadResolver;
 import kr.or.ddit.dto.AttachVO;
 import kr.or.ddit.handler.Handler;
+import kr.or.ddit.listener.ApplicationContextInitListener;
 import kr.or.ddit.util.GetUploadPath;
 import kr.or.ddit.util.MultipartHttpServletRequestParser;
 
 public class SummernoteUploadImgHandler implements Handler {
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(SummernoteUploadImgHandler.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(SummernoteUploadImgHandler.class);
 	
 	// 업로드 파일 환경 설정
 	private static final int MEMORY_THRESHOLD = 1024 * 500; // 500KB
@@ -21,6 +26,7 @@ public class SummernoteUploadImgHandler implements Handler {
 	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		INFO_LOGGER.info("■■■init SummernoteUploadImgHandler■■■");
 		String url=null;
 		
 		MultipartHttpServletRequestParser multi=null;
@@ -29,7 +35,7 @@ public class SummernoteUploadImgHandler implements Handler {
 			
 			//파일 저장 경로 설정
 			String uploadPath = GetUploadPath.getUploadPath("summernote.img");
-			
+			INFO_LOGGER.info("uploadPath : " + uploadPath);
 			//사진이미지 저장
 			List<AttachVO> attachList = FileUploadResolver.fileUpload(multi.getFileItems("file"),uploadPath);
 			

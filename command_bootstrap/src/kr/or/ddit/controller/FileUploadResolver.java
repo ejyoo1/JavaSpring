@@ -5,31 +5,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
+import org.apache.log4j.Logger;
 
+import kr.or.ddit.dao.MemberDAOImpl;
 import kr.or.ddit.dto.AttachVO;
 import kr.or.ddit.util.MakeFileName;
 
 public class FileUploadResolver { 
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(FileUploadResolver.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(FileUploadResolver.class);
 	// FileItem ==> MultipartHttpServletRequestParser 가져옴.
 	public static List<AttachVO> fileUpload(FileItem[] items, String uploadPath) throws Exception{
 		List<AttachVO> attachList = new ArrayList<AttachVO>();
 		
 		File file = new File(uploadPath);
 		if(!file.mkdirs()) {
-			System.out.println(uploadPath + "가 이미 존재하거나 생성을 실패했습니다.");
+			INFO_LOGGER.info(uploadPath + "가 이미 존재하거나 생성을 실패했습니다.");
 		}
 		
 		if(items != null) 
 			for(FileItem item : items) {
 				if(!item.isFormField()) {
+					INFO_LOGGER.info("파일 필드입니다.");
 					String fileName = new File(item.getName()).getName();
+					INFO_LOGGER.info("fileNameUUID_before : " + fileName);
 					fileName = MakeFileName.toUUIDFileName(fileName, "$$");
+					INFO_LOGGER.info("fileNameUUID_After : " + fileName);
 					String filePath = uploadPath + File.separator + fileName;
+					INFO_LOGGER.info("UploadPath+fileName : " + filePath);
 					File storeFile = new File(filePath);
 					
 					// local HDD 에 저장
 					try {
 						item.write(storeFile);
+						INFO_LOGGER.info("하드에 저장을 완료하였습니다.");
 					} catch (Exception e) {
 						e.printStackTrace();
 						throw e;
@@ -43,7 +52,7 @@ public class FileUploadResolver {
 					
 					attachList.add(attach);
 					
-					System.out.println("upload file : " + attach);
+					INFO_LOGGER.info("upload file : " + attach);
 				}
 			}
 			return attachList;

@@ -48,6 +48,22 @@
 							<div class="form-group col-sm-4">
 								<label for="writer">작성자</label>
 							</div><!-- ./form-group col-sm-4 -->
+							
+							<div class="form-group col-sm-4">
+							 <label for="regDate">작성일</label>
+							 <input type="text" class="form-control" id="regDate" value="<fmt:formatData value="${qna.regdate}" pattern="yyyy-MM-dd" />" readonly />
+							</div><!-- ./form-group col-sm-4 -->
+							
+							<div class="form-group col-sm-4" >
+							 <label for="viewcnt">조회수</label>
+							 <input type="text" class="form-control" id="viewcnt" readonly value="${qna.viewcnt }"/>
+							</div><!-- ./form-group col-sm-4 -->
+							
+							<div class="form-group col-sm-12">
+                <label for="content">내 용</label>
+                <div id="content">${notice.content }</div>  
+              </div><!-- ./form-group col-sm-4 -->
+							
 						</div><!-- ./row -->
 					</div><!-- ./card-body -->
 				</div><!-- ./card card-outline card-primary -->
@@ -56,9 +72,19 @@
 	</section>
 </div><!-- ./style div -->
 
+<form role="form">
+  <input type="hidden" name="nno" value="${qna.qno}" />
+</form>
+
+
 <script>
 	function modify_go(){
-		alert("modify_go");
+		var formObj = $("form[role='form']");
+		formObj.attr({
+		      'action':'modifyForm.do',
+		      'method':'post'
+    });
+		formObj.submit();
 	}
 	
 	function remove_go(){
