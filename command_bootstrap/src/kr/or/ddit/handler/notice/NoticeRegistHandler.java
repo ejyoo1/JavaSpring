@@ -24,7 +24,6 @@ public class NoticeRegistHandler implements Handler {
 		String title = (String) request.getAttribute("XSStitle"); // Object이므로 String으로 파싱
 		String content = request.getParameter("content");
 		String writer = request.getParameter("writer");
-		
 		NoticeVO notice = new NoticeVO();
 		notice.setTitle(title);
 		notice.setContent(content);

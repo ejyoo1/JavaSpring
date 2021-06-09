@@ -12,8 +12,8 @@ import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dto.NoticeVO;
 
 public class NoticeDAOImpl implements NoticeDAO{
-	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(MemberDAOImpl.class);
-	private static final Logger INFO_LOGGER = Logger.getLogger(MemberDAOImpl.class);
+	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(NoticeDAOImpl.class);
+	private static final Logger INFO_LOGGER = Logger.getLogger(NoticeDAOImpl.class);
 	
 	@Override
 	public List<NoticeVO> selectSearchNoticeList(SqlSession session, SearchCriteria cri) throws SQLException {

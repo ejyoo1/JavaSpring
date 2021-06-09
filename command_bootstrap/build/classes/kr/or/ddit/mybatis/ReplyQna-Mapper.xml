@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReplyQna-Mapper">
+	
+	<select id="selectReplySeqNextValue" resultType="int">
+		select replyqna_seq.nextVal
+		from dual
+	</select>
+	
+	<select id="selectReplyList" resultType="replyqna">
+		select 
+		*
+		from replyqna
+		where qno = #{qno}
+		order by rno asc
+	</select>
+	
+	<select id="countReply" resultType="int">
+		select count(qno)
+		from replyqna
+		where qno = #{qno}
+	</select>
+	
+	<update id="insertReply">
+		insert into
+		replyqna(rno, qno, replytext, replyer)
+		values(#{rno},#{qno},#{replytext},#{replyer})
+	</update>
+	
+	<update id="updateReply">
+      update replyqna
+      set replytext = #{replytext}
+        , updatedate = sysdate
+      where rno = #{rno}
+   </update>
+	
+	<update id="deleteReply">
+		delete
+		from replyqna
+		where rno=#{rno}
+	</update>
+	
+</mapper>

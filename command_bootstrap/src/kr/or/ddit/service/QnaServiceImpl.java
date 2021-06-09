@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import kr.or.ddit.command.PageMaker;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.dao.QnaDAO;
+import kr.or.ddit.dao.ReplyQnaDAO;
 import kr.or.ddit.dto.QnaVO;
 
 public class QnaServiceImpl implements QnaService {
@@ -24,14 +25,25 @@ public class QnaServiceImpl implements QnaService {
 	public void setQnaDAO(QnaDAO qnaDAO) {
 		this.qnaDAO = qnaDAO;
 	}
+	
+	private ReplyQnaDAO replyQnaDAO;
+	public void setReplyQnaDAO(ReplyQnaDAO replyQnaDAO) {
+		this.replyQnaDAO = replyQnaDAO;
+	}
 
 	@Override
 	public Map<String, Object> getQnaList(SearchCriteria cri) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
+		Map<String, Object> dataMap = null;
 		try {
-			Map<String, Object> dataMap = new HashMap<String, Object>();
+			dataMap = new HashMap<String, Object>();
 			
 			List<QnaVO> qnaList = qnaDAO.selectSearchQnaList(session, cri);
+			
+			for(QnaVO qna : qnaList) {
+				int replycnt = replyQnaDAO.countReply(session, qna.getQno());
+				qna.setReplycnt(replycnt);
+			}
 			int totalCount = qnaDAO.selectSearchQnaListCount(session, cri);
 			
 			PageMaker pageMaker = new PageMaker();
@@ -41,10 +53,13 @@ public class QnaServiceImpl implements QnaService {
 			dataMap.put("qnaList", qnaList);
 			dataMap.put("pageMaker", pageMaker);
 			
-			return dataMap;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
+		return dataMap;
 	}
 
 	@Override
@@ -54,6 +69,8 @@ public class QnaServiceImpl implements QnaService {
 		try {
 			qna = qnaDAO.selectQnaByQno(session, qno);
 			qnaDAO.increaseViewCount(session, qno);
+		} catch(Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -66,10 +83,50 @@ public class QnaServiceImpl implements QnaService {
 		QnaVO qna = null;
 		try {
 			qna = qnaDAO.selectQnaByQno(session, qno);
+		} catch(Exception e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
 		return qna;
 	}
 
+	@Override
+	public void regist(QnaVO qna) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		int qno = 0;
+		try {
+			qno = qnaDAO.selectQnaSequenceNextValue(session);
+			qna.setQno(qno);
+			qnaDAO.insertQna(session, qna);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void modify(QnaVO qna) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			qnaDAO.updateQna(session, qna);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void remove(int qno) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			qnaDAO.deleteQna(session, qno);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
 }

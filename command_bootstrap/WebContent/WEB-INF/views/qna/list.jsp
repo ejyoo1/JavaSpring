@@ -44,7 +44,7 @@
 	  					<div class="card-body">
 	  						<ul>
 	  							<li>
-	  								운동장 이용방법 문의, 입금확인, 예약취소 및 사용료 반환 요청 등 운동장 이용에 관한 문의 및 답변 게시판입니다.
+	  								샐러드 이용방법 문의, 입금확인, 예약취소 및 사용료 반환 요청 등 운동장 이용에 관한 문의 및 답변 게시판입니다.
 	  							</li>
 	  						</ul>
 	  					</div><!-- ./card-body -->
@@ -110,7 +110,7 @@
 							</c:if>
 							<c:forEach items="${qnaList}" var="qna">
 								<tr style='font-size:0.85em;'>
-									<td>1</td>
+									<td>${qna.qno}</td>
 									<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden; 
 														white-space: nowrap; text-overflow: ellipsis;">
 														

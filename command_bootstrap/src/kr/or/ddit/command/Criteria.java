@@ -1,7 +1,13 @@
 package kr.or.ddit.command;
 
-public class Criteria {
+import org.apache.log4j.Logger;
 
+public class Criteria {
+	private static final Logger INFO_LOGGER = Logger.getLogger(Criteria.class);
+	{
+		INFO_LOGGER.info("■■■■■■■■Criteria 호출■■■■■■■■");
+	}
+	
    private int page = 1; // 페이지를 설정하지 않은 경우 자동적으로 1 설정
    private int perPageNum = 10; // 한 페이지 당 10개 보이기 설정
    private int startRowNum; // 시작 글 번호

@@ -8,38 +8,61 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 
 import kr.or.ddit.command.SearchCriteria;
+import kr.or.ddit.dto.BoardVO;
 import kr.or.ddit.dto.QnaVO;
 
-public class QnaDAOImpl implements QnaDAO{
+public class QnaDAOImpl implements QnaDAO {
 	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(QnaDAOImpl.class);
 	private static final Logger INFO_LOGGER = Logger.getLogger(QnaDAOImpl.class);
-	
+
 	@Override
 	public List<QnaVO> selectSearchQnaList(SqlSession session, SearchCriteria cri) throws SQLException {
 		int offset = cri.getStartRowNum();
 		int limit = cri.getPerPageNum();
-		RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset,limit);
 		
-		List<QnaVO> qnaList = session.selectList("Qna-Mapper.selectSearchQnaList", cri, rowBounds);
+		List<QnaVO> qnaList = 
+				session.selectList("Qna-Mapper.selectSearchQnaList", cri, rowBounds);
+		
 		return qnaList;
 	}
+
 	@Override
 	public int selectSearchQnaListCount(SqlSession session, SearchCriteria cri) throws SQLException {
 		int count = session.selectOne("Qna-Mapper.selectSearchQnaListCount", cri);
 		return count;
 	}
+
 	@Override
 	public QnaVO selectQnaByQno(SqlSession session, int qno) throws SQLException {
 		QnaVO qna = session.selectOne("Qna-Mapper.selectQnaByQno", qno);
 		return qna;
 	}
+
 	@Override
 	public void increaseViewCount(SqlSession session, int qno) throws SQLException {
 		session.update("Qna-Mapper.increaseViewCount", qno);
 	}
+
 	@Override
 	public int selectQnaSequenceNextValue(SqlSession session) throws SQLException {
-		int result = session.update("Qno-mapper.insertQna");
-		return result;
+		int seq_num = session.selectOne("Qna-Mapper.selectQnaSequenceNextValue");
+		return seq_num;
 	}
+
+	@Override
+	public void insertQna(SqlSession session, QnaVO qna) throws SQLException {
+		session.update("Qna-Mapper.insertQna", qna);
+	}
+
+	@Override
+	public void updateQna(SqlSession session, QnaVO qna) throws SQLException {
+		session.update("Qna-Mapper.updateQna", qna);
+	}
+
+	@Override
+	public void deleteQna(SqlSession session, int qno) throws SQLException {
+		session.update("Qna-Mapper.deleteQna", qno);
+	}
+
 }

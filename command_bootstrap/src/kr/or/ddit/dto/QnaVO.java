@@ -14,6 +14,8 @@ public class QnaVO {
 	private String isanswer = "N";
 	private String isdel = "N";
 	
+	private int replycnt;
+	
 	public int getQno() {
 		return qno;
 	}
@@ -73,5 +75,11 @@ public class QnaVO {
 	}
 	public void setIsdel(String isdel) {
 		this.isdel = isdel;
+	}
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
 	}
 }

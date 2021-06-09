@@ -14,56 +14,75 @@
 			and content like '%'||#{keyword}||'%'
 		</if>
 		<if test="searchType == 'tc'.toString()">
-		  and (
-		  title like '%'||#{keyword}||'%'
-		  or
-		  content like '%'||#{keyword}||'%'
-		  )		  
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
 		</if>
 		<if test="searchType == 'tcw'.toString()">
-      and (
-      title like '%'||#{keyword}||'%'
-      or
-      writer like '%'||#{keyword}||'%'
-      or
-      content like '%'||#{keyword}||'%'
-      )
-    </if>
+			and (
+			title like '%'||#{keyword}||'%'
+			or
+			writer like '%'||#{keyword}||'%'
+			or
+			content like '%'||#{keyword}||'%'
+			)
+		</if>
 	</sql>
 	
 	<select id="selectSearchQnaList" resultType="qna">
-	 select
-	 *
-	 from qna
-	 where qno is not null
-	 <include refid="search" />
-	 order by regDate desc
+		select 
+		*
+		from qna
+		where qno is not null
+		<include refid="search" />
+		order by regDate desc
 	</select>
 	<select id="selectSearchQnaListCount" resultType="int">
-    select
-    count(*)
-    from qna
-    where qno is not null
-    <include refid="search" />
-    order by regDate desc
-  </select>
-  
-  <select id="selectQnaByNno" parameterType="int" resultType="qna">
-    select
-    *
-    from qna
-    where qno=#{qno}
-  </select>
-  
-  <update id="increaseViewCount" parameterType="int"><!-- detail 할 때 -->
-    update qna
-    set viewcnt=viewcnt+1
-    where qno=#{qno}
-  </update>
-  
-  <update id="insertNotice" parameterType="notice">
-    insert into
-    qna(qno, title, writer, content)
-    values(#{qno},#{title},#{writer},#{content})
-  </update>
+		select
+		count(*)
+		from qna
+		where qno is not null
+		<include refid="search" />
+		order by regDate desc
+	</select>
+	
+	<select id="selectQnaByQno" parameterType="int" resultType="qna">
+		select
+		*
+		from qna
+		where qno=#{qno}
+	</select>
+	
+	<select id="selectQnaSequenceNextValue" resultType="int">
+		select qna_seq.nextVal
+		from dual
+	</select>
+	
+	<update id="increaseViewCount" parameterType="int"><!-- detail 할 때 -->
+		update qna
+		set viewcnt=viewcnt+1
+		where qno=#{qno}
+	</update>
+	
+	<update id="insertQna" parameterType="qna">
+		insert into
+		qna(qno, title, writer, content, regdate)
+		values(#{qno},#{title},#{writer},#{content}, sysdate)
+	</update>
+	
+	<update id="updateQna" parameterType="qna">
+      update qna
+      set title = #{title}
+        , content = #{content}
+      where qno = #{qno}
+   </update>
+	
+	<update id="deleteQna" parameterType="int">
+		delete
+		from qna
+		where qno=#{qno}
+	</update>
+	
 </mapper>

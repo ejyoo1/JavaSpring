@@ -70,24 +70,18 @@
 <script>
 //라이브러리 읽히기 전에 스크립트가 생성됨. == 파일이 다 읽어진 후에 script를 실행하도록 작업
 window.onload=function(){
-	Summernote_start($('#content'));	
+	Summernote_start($('#content')); 
 }
-
 //form role="form" method="post" action="regist.do" name="registForm"
 function regist_go(){
-	var form = document.registForm; // js dom을 사용하여 name을 잡는 방법
+	var form = document.registForm;// js dom을 사용하여 name을 잡는 방법
 	if(form.title.value==""){
 		alert("제목은 필수입니다.");
-		return;		
-	}
-	if(form.content.value=""){
-		alert("내용은 필수입니다.");
 		return;
 	}
+	
 	form.submit();
 }
 </script>
 
 <%@ include file="/WEB-INF/views/common/summernote.jsp" %>
-
-

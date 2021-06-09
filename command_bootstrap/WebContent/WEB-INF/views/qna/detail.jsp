@@ -47,11 +47,13 @@
 						<div class="row">
 							<div class="form-group col-sm-4">
 								<label for="writer">작성자</label>
+								<input type="text" class="form-control" id="writer" readonly value="${qna.writer }"/>
 							</div><!-- ./form-group col-sm-4 -->
 							
 							<div class="form-group col-sm-4">
 							 <label for="regDate">작성일</label>
-							 <input type="text" class="form-control" id="regDate" value="<fmt:formatData value="${qna.regdate}" pattern="yyyy-MM-dd" />" readonly />
+							 <input type="text" class="form-control" id="regDate" readonly 
+									value="<fmt:formatDate value="${qna.regdate }" pattern="yyyy-MM-dd" />" />
 							</div><!-- ./form-group col-sm-4 -->
 							
 							<div class="form-group col-sm-4" >
@@ -61,7 +63,7 @@
 							
 							<div class="form-group col-sm-12">
                 <label for="content">내 용</label>
-                <div id="content">${notice.content }</div>  
+                <div id="content">${qna.content }</div>  
               </div><!-- ./form-group col-sm-4 -->
 							
 						</div><!-- ./row -->
@@ -70,10 +72,43 @@
 			</div><!-- ./col-md-12 -->
 		</div><!-- ./row -->
 	</section>
+	
+	<section class="content container-fluid">
+	    	<!-- reply component start --> 
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-info">					
+						<div class="card-body">
+							<!-- The time line -->
+							<div class="timeline">
+								<!-- timeline time label -->
+								<div class="time-label" id="repliesDiv">
+									<span class="bg-green">Replies List </span>							
+								</div>
+							</div>
+							<div class='text-center'>
+								<ul id="pagination" class="pagination justify-content-center m-0">
+									
+								</ul>
+							</div>
+						</div>
+						<div class="card-footer">
+							<label for="newReplyWriter">Writer</label>
+							<input class="form-control" type="hidden" placeholder="USER ID"	 id="newReplyWriter" readonly value="${loginUser.id }"> 
+							<label for="newReplyText">Reply Text</label>
+							<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText">
+							<br/>
+							<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+						</div>				
+					</div>			
+					
+				</div><!-- end col-md-12 -->
+			</div><!-- end row -->
+    </section>
 </div><!-- ./style div -->
 
 <form role="form">
-  <input type="hidden" name="nno" value="${qna.qno}" />
+  <input type="hidden" name="qno" value="${qna.qno}" />
 </form>
 
 
@@ -88,6 +123,13 @@
 	}
 	
 	function remove_go(){
-		alert("remove_go");
+		var formObj = $("form[role='form']");
+		//alert("click remove btn");
+		var answer = confirm("정말 삭제하시겠습니까?");
+		if(answer){		
+			formObj.attr("action", "remove.do");
+			formObj.attr("method", "post");
+			formObj.submit();
+		}
 	}
 </script>

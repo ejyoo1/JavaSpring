@@ -25,9 +25,7 @@ public class NoticeListHandler implements Handler {
 		String page = request.getParameter("page");
 		String perPageNum = request.getParameter("perPageNum");
 		String searchType = request.getParameter("searchType");
-		System.out.println("searchType : " + searchType);
 		String keyword = request.getParameter("keyword");
-		System.out.println("keyword : " + keyword);
 		
 		SearchCriteria cri = new SearchCriteria();
 		cri.setPage(page);
