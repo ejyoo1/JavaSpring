@@ -7,7 +7,7 @@
 <title>비동기 연습</title>
 
 <body>
-
+<div class="content-wrapper">
 <section class="content-header">
 	<div class="container-fluid">
 		<div class="row md-2">
@@ -32,5 +32,5 @@
 		</div><!-- ./row -->
 	</div><!-- ./container-fluid -->
 </section>
-
+</div>
 </body>
