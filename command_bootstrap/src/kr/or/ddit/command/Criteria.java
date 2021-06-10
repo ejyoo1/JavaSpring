@@ -17,36 +17,46 @@ public class Criteria {
       return page;
    }
    public void setPage(int page) { // 페이지가 숫자 형식으로 요청이 들어온 경우
+	   INFO_LOGGER.info("★★★★★★★ setPage() Parameter : " + page);
       if (page < 1) page = 1; // 페이지는 최소 1페이지 이상이어야 함.
+      INFO_LOGGER.info("★★★★★★★ setPage() return : " + page);
       this.page = page;
    }
    public void setPage(String page) { // 페이지가 외부 파라미터로 들어온 경우
+	   INFO_LOGGER.info("★★★★★★★ setPage() Parameter : " + page);
       if (page != null && !page.isEmpty()) { 
          setPage(Integer.parseInt(page)); // 페이지 숫자로 파싱
       } else {
          this.page = 1; // 페이지가 없는 경우 1로 설정
       }
+      INFO_LOGGER.info("★★★★★★★ setPage() return : " + page);
    }
    public int getPerPageNum() {
       return perPageNum;
    }
    public void setPerPageNum(int perPageNum) {
+	   INFO_LOGGER.info("★★★★★★★ setPerPageNum() Parameter : " + perPageNum);
       if(perPageNum < 1) this.perPageNum = 1;
+      INFO_LOGGER.info("★★★★★★★ setPerPageNum() return : " + perPageNum);
       this.perPageNum = perPageNum;
    }
    public void setPerPageNum(String perPageNum) {
+	   INFO_LOGGER.info("★★★★★★★ setPerPageNum() Parameter : " + perPageNum);
       if (perPageNum != null && !perPageNum.isEmpty()) {
          setPerPageNum(Integer.parseInt(perPageNum));
       } else {
          this.perPageNum = 10; // 페이지 글 개수 설정이 없는 경우 10개로 설정
       }
+      INFO_LOGGER.info("★★★★★★★ setPerPageNum() return : " + perPageNum);
    }
    public int getStartRowNum() {
       this.startRowNum = (this.page - 1) * perPageNum; // page : 1일 때, startRowNum = 0 * 10;
+      INFO_LOGGER.info("★★★★★★★ getStartRowNum() return : " + this.startRowNum);
       return startRowNum;
    }
    public int getEndRowNum() {
       this.endRowNum = this.startRowNum + this.perPageNum; // page : 1일 때, endRowNum = 0 + 10; // 끝은 '<' 로 하는 듯.
+      INFO_LOGGER.info("★★★★★★★ getEndRowNum() return : " + this.endRowNum);
       return endRowNum;
    }
    

@@ -19,5 +19,5 @@ public interface ReplyService {
 	void modifyReply(ReplyVO reply)throws SQLException;
 	
 	//삭제
-	void removeReply(ReplyVO reply)throws SQLException;
+	void removeReply(int rno)throws SQLException;
 }

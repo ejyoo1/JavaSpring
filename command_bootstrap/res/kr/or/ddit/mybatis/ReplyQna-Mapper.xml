@@ -5,32 +5,32 @@
 <mapper namespace="ReplyQna-Mapper">
 	
 	<select id="selectReplySeqNextValue" resultType="int">
-		select replyqna_seq.nextVal
+		select reply_seq.nextVal
 		from dual
 	</select>
 	
-	<select id="selectReplyList" resultType="replyqna">
+	<select id="selectReplyList" resultType="reply">
 		select 
 		*
-		from replyqna
+		from reply
 		where qno = #{qno}
 		order by rno asc
 	</select>
 	
 	<select id="countReply" resultType="int">
 		select count(qno)
-		from replyqna
+		from reply
 		where qno = #{qno}
 	</select>
 	
 	<update id="insertReply">
 		insert into
-		replyqna(rno, qno, replytext, replyer)
+		reply(rno, qno, replytext, replyer)
 		values(#{rno},#{qno},#{replytext},#{replyer})
 	</update>
 	
 	<update id="updateReply">
-      update replyqna
+      update reply
       set replytext = #{replytext}
         , updatedate = sysdate
       where rno = #{rno}
@@ -38,7 +38,7 @@
 	
 	<update id="deleteReply">
 		delete
-		from replyqna
+		from reply
 		where rno=#{rno}
 	</update>
 	

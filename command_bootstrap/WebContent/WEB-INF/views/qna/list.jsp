@@ -115,7 +115,14 @@
 														white-space: nowrap; text-overflow: ellipsis;">
 														
 									<a href="javascript:OpenWindow('detail.do?qno=${qna.qno}','상세보기',800,700);">
-										${qna.title}      						
+										<span class="col-sm-12">${qna.title}
+											<c:if test="${qna.replycnt ne 0}">
+												<span class="nav-item">
+													&nbsp;&nbsp;<i class="fa fa-comment"></i>
+													<span class="badge badge-warning navbar-badge">${qna.replycnt}</span>
+												</span>
+											</c:if>
+										</span>		     						
 									</a>
 									</td>
 									<td>${qna.writer}</td>

@@ -50,26 +50,46 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Override
 	public int getReplyListCount(int bno) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			int count = replyDAO.countReply(session, bno);
+			return count;
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void registReply(ReplyVO reply) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			int rno = replyDAO.selectReplySeqNextValue(session);
+			reply.setRno(rno);
+			
+			replyDAO.insertReply(session, reply);
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void modifyReply(ReplyVO reply) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			replyDAO.updateReply(session, reply);
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
-	public void removeReply(ReplyVO reply) throws SQLException {
-		// TODO Auto-generated method stub
-		
+	public void removeReply(int rno) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			replyDAO.deleteReply(session, rno);
+		} finally {
+			session.close();
+		}
 	}
 	
 }

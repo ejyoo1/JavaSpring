@@ -95,7 +95,7 @@
 								<ul id="pagination" class="pagination justify-content-center m-0">
 									
 								</ul>
-							</div>
+							</div><!-- ./text-center -->
 						</div>
 						<div class="card-footer">
 							<label for="newReplyWriter">Writer</label>
@@ -103,7 +103,7 @@
 							<label for="newReplyText">Reply Text</label>
 							<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText">
 							<br/>
-							<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+							<button type="button" class="btn btn-primary" id="replyAddBtn" onclick="replyRegist_go();">ADD REPLY</button>
 						</div>				
 					</div>			
 					
@@ -112,12 +112,32 @@
     </section>
   </div>
   <!-- /.content-wrapper -->
+  
+  <!-- Modal -->
+<div id="modifyModal" class="modal modal-default fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="display:none;"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>        
+      </div>
+      <div class="modal-body" data-rno>
+        <p><input type="text" id="replytext" class="form-control"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="replyModBtn" onclick="replyModify_go();">Modify</button>
+        <button type="button" class="btn btn-danger" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
 
 <form role="form">
 	<input type="hidden" name="bno" value="${board.bno }" />
 </form>
-	
-  
 <script>
 	
 	
@@ -141,7 +161,7 @@
 			formObj.submit();
 		}
 	}
- 	
+	
 </script>
 
 <%@include file="./reply_js.jsp" %>

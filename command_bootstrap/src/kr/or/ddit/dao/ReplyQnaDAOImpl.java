@@ -7,17 +7,18 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.command.SearchCriteria;
-import kr.or.ddit.dto.ReplyQnaVO;
+import kr.or.ddit.dto.ReplyVO;
 
 public class ReplyQnaDAOImpl implements ReplyQnaDAO{
 
 	@Override
-	public void insertReply(SqlSession session, ReplyQnaVO reply) throws SQLException {
+	public void insertReply(SqlSession session, ReplyVO reply) throws SQLException {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+reply.getQno()+"@@@@@@@@@@@@@@@@@@@@@");
 		session.update("ReplyQna-Mapper.insertReply", reply);
 	}
 
 	@Override
-	public void updateReply(SqlSession session, ReplyQnaVO reply) throws SQLException {
+	public void updateReply(SqlSession session, ReplyVO reply) throws SQLException {
 		session.update("ReplyQna-Mapper.updateReply", reply);
 	}
 
@@ -27,12 +28,12 @@ public class ReplyQnaDAOImpl implements ReplyQnaDAO{
 	}
 
 	@Override
-	public List<ReplyQnaVO> selectReplyListPage(SqlSession session, int qno, SearchCriteria cri) throws SQLException {
+	public List<ReplyVO> selectReplyListPage(SqlSession session, int qno, SearchCriteria cri) throws SQLException {
 		int offset = cri.getStartRowNum();
 		int limit = cri.getPerPageNum();
 		RowBounds rowBounds = new RowBounds(offset,limit);
 		
-		List<ReplyQnaVO> replyList = session.selectList("ReplyQna-Mapper.selectReplyList", qno, rowBounds);
+		List<ReplyVO> replyList = session.selectList("ReplyQna-Mapper.selectReplyList", qno, rowBounds);
 		return replyList;
 	}
 

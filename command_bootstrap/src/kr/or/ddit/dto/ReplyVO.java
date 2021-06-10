@@ -5,11 +5,20 @@ import java.util.Date;
 public class ReplyVO {
 	private int rno;
 	private int bno;
+	private int qno;
 	private String replyer;
 	private String replytext;
 	private Date regdate;
 	private Date updatedate;
 	
+	private boolean issuper;
+	
+	public boolean isIssuper() {
+		return issuper;
+	}
+	public void setIssuper(boolean issuper) {
+		this.issuper = issuper;
+	}
 	public int getRno() {
 		return rno;
 	}
@@ -45,6 +54,12 @@ public class ReplyVO {
 	}
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
+	}
+	public int getQno() {
+		return qno;
+	}
+	public void setQno(int qno) {
+		this.qno = qno;
 	}
 	
 }

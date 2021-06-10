@@ -82,7 +82,7 @@
 	<update id="deleteQna" parameterType="int">
 		delete
 		from qna
-		where qno=#{qno}
+		where qno=#{qno} cascade;
 	</update>
 	
 </mapper>

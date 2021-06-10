@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div  style="max-width:800px;min-width:420px;margin:0 auto;min-height:812px;">
@@ -92,20 +93,42 @@
 								</ul>
 							</div>
 						</div>
-						<div class="card-footer">
-							<label for="newReplyWriter">Writer</label>
-							<input class="form-control" type="hidden" placeholder="USER ID"	 id="newReplyWriter" readonly value="${loginUser.id }"> 
-							<label for="newReplyText">Reply Text</label>
-							<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText">
-							<br/>
-							<button type="button" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
-						</div>				
+						<c:if test="${loginUser.id eq 'super'}">
+							<div class="card-footer">
+								<label for="newReplyWriter">Writer</label>
+								<input class="form-control" type="hidden" placeholder="USER ID"	 id="newReplyWriter" readonly value="${loginUser.id }"> 
+								<label for="newReplyText">Reply Text</label>
+								<input class="form-control" type="text"	placeholder="REPLY TEXT" id="newReplyText">
+								<br/>
+								<button type="button" class="btn btn-primary" id="replyAddBtn" onclick="replyRegist_go();">ADD REPLY</button>
+							</div>		
+						</c:if>		
 					</div>			
 					
 				</div><!-- end col-md-12 -->
 			</div><!-- end row -->
     </section>
 </div><!-- ./style div -->
+
+<!-- Modal -->
+<div id="modifyModal" class="modal modal-default fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button> 
+			</div><!-- ./modal-header -->
+			<div class="modal-body">
+				<p><input type="text" id="replytext" class="form-control"></p>
+			</div><!-- ./modal-body -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" id="replyModBtn" onclick="replyModify_go();">Modify</button>
+				<button type="button" class="btn btn-danger" id="replyDelBtn" onclick="replyRemove_go();">DELETE</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div><!-- ./modal-footer -->
+		</div><!-- ./modal-content -->
+	</div><!-- ./modal-dialog -->
+</div><!-- ./modal modal-default fade -->
 
 <form role="form">
   <input type="hidden" name="qno" value="${qna.qno}" />
@@ -133,3 +156,5 @@
 		}
 	}
 </script>
+
+<%@include file="./reply_qna_js.jsp" %>

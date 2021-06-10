@@ -11,11 +11,11 @@
 	<bean id="noticeDAO" class="kr.or.ddit.dao.NoticeDAOImpl" />
 	<bean id="boardDAO" class="kr.or.ddit.dao.BoardDAOImpl" />
 	<bean id="replyDAO" class="kr.or.ddit.dao.ReplyDAOImpl" />
-	<bean id="replyQnaDAO" class="kr.or.ddit.dao.ReplyQnaDAOImpl" />
-	
 	<bean id="pdsDAO" class="kr.or.ddit.dao.PdsDAOImpl" />
 	
+	<bean id="replyQnaDAO" class="kr.or.ddit.dao.ReplyQnaDAOImpl" />
 	<bean id="qnaDAO" class="kr.or.ddit.dao.QnaDAOImpl" />
+	
 	
 	<!-- Service layer -->
 	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl">
@@ -40,15 +40,10 @@
 		<property name="replyDAO" ref-value="replyDAO" />
 	</bean>
 	
-	<bean id="replyQnaService" class="kr.or.ddit.service.ReplyQnaServiceImpl">
-		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="replyQnaDAO" ref-value="replyQnaDAO" />
-	</bean>
-	
-	<bean id="PdsService" class="kr.or.ddit.service.PdsServiceImpl">
-		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="pdsDAO" ref-value="pdsDAO" />
-	</bean>
+<!-- 	<bean id="PdsService" class="kr.or.ddit.service.PdsServiceImpl"> -->
+<!-- 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" /> -->
+<!-- 		<property name="pdsDAO" ref-value="pdsDAO" /> -->
+<!-- 	</bean> -->
 	
 	
 	<bean id="qnaService" class="kr.or.ddit.service.QnaServiceImpl">
@@ -56,5 +51,9 @@
     <property name="qnaDAO" ref-value="qnaDAO" />
     <property name="replyQnaDAO" ref-value="replyQnaDAO" />
   </bean>
+  <bean id="replyQnaService" class="kr.or.ddit.service.ReplyQnaServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="replyQnaDAO" ref-value="replyQnaDAO" />
+	</bean>
 	
 </beans>

@@ -30,7 +30,7 @@ public class QnaServiceImpl implements QnaService {
 	public void setReplyQnaDAO(ReplyQnaDAO replyQnaDAO) {
 		this.replyQnaDAO = replyQnaDAO;
 	}
-
+	
 	@Override
 	public Map<String, Object> getQnaList(SearchCriteria cri) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -44,6 +44,7 @@ public class QnaServiceImpl implements QnaService {
 				int replycnt = replyQnaDAO.countReply(session, qna.getQno());
 				qna.setReplycnt(replycnt);
 			}
+			
 			int totalCount = qnaDAO.selectSearchQnaListCount(session, cri);
 			
 			PageMaker pageMaker = new PageMaker();
