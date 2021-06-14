@@ -28,9 +28,6 @@ public class BoardRegistHandler implements Handler {
 		board.setTitle(title);
 		board.setContent(content);
 		board.setWriter(writer);
-		System.out.println(title);
-		System.out.println(content);
-		System.out.println(writer);
 		
 		boardService.regist(board);
 		

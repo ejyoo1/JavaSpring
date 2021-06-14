@@ -9,22 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.command.SearchCriteria;
 import kr.or.ddit.handler.Handler;
 import kr.or.ddit.service.PdsService;
+import kr.or.ddit.util.ExceptionLoggerHelper;
 
-public class PdsListHandler implements Handler {
+public class PdsListHandler implements Handler{
 	
 	private PdsService pdsService;
-	public void setPdsService(PdsService pdsService) {
-		this.pdsService = pdsService;
+	public void setPdsService (PdsService pdsService) {
+		this.pdsService=pdsService;
 	}
-
+	
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "pds/list";
-		
-		String page = request.getParameter("page");
-		String perPageNum = request.getParameter("perPageNum");
-		String searchType = request.getParameter("searchType");
-		String keyword = request.getParameter("keyword");
+		String url="pds/list";
+
+		String page=request.getParameter("page");
+		String perPageNum=request.getParameter("perPageNum");	
+		String searchType=request.getParameter("searchType");
+		String keyword=request.getParameter("keyword");
 		
 		SearchCriteria cri = new SearchCriteria();
 		cri.setPage(page);
@@ -32,16 +34,18 @@ public class PdsListHandler implements Handler {
 		cri.setSearchType(searchType);
 		cri.setKeyword(keyword);
 		
-		Map<String,Object> dataMap = null;
 		
 		try {
-			dataMap = pdsService.getPdsList(cri);
-			request.setAttribute("dataMap", dataMap);
+			Map<String,Object> dataMap=pdsService.getList(cri);			
+			request.setAttribute("dataMap", dataMap);			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// url = null;
-		}
+			//exception helper : 로그 기록
+			ExceptionLoggerHelper.write(request, e, pdsService);
+			throw e;
+		}	
+		
 		return url;
 	}
-	
+
 }

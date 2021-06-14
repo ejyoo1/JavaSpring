@@ -1,20 +1,28 @@
 package kr.or.ddit.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class PdsVO {
+	
 	private int pno;
 	private String title;
-	private String writer;
 	private String content;
+	private String writer;
 	private int viewcnt;
-	private Date regdate;
+	private Date regDate;
 	private Date updatedate;
-	private Date startdate;
-	private Date enddate;
-	private int point;
-	private String dist;
 	
+	private List<AttachVO> attachList;
+	
+	
+	
+	public List<AttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<AttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	public int getPno() {
 		return pno;
 	}
@@ -27,17 +35,17 @@ public class PdsVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public int getViewcnt() {
 		return viewcnt;
@@ -45,11 +53,11 @@ public class PdsVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	public Date getRegdate() {
-		return regdate;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	public Date getUpdatedate() {
 		return updatedate;
@@ -57,30 +65,13 @@ public class PdsVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	public Date getStartdate() {
-		return startdate;
+	@Override
+	public String toString() {
+		return "PdsVO [pno=" + pno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", viewcnt="
+				+ viewcnt + ", regDate=" + regDate + ", updatedate=" + updatedate + ", attachList=" + attachList
+				+ ", getAttachList()=" + getAttachList() + ", getPno()=" + getPno() + ", getTitle()=" + getTitle()
+				+ ", getContent()=" + getContent() + ", getWriter()=" + getWriter() + ", getViewcnt()=" + getViewcnt()
+				+ ", getRegDate()=" + getRegDate() + ", getUpdatedate()=" + getUpdatedate() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
-	public Date getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
-	}
-	public String getDist() {
-		return dist;
-	}
-	public void setDist(String dist) {
-		this.dist = dist;
-	}
-	
-	
 }

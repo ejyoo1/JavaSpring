@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 실행해야 하는 서비스를 담은곳 -->
+
 <beans>
 	<!-- dataSource -->
 	<bean id="sqlSessionFactory" class="kr.or.ddit.mybatis.OracleMyBatisSqlSessionFactory" />
+	
 
 	<!-- Repository Layer -->
 	<bean id="menuDAO"  class="kr.or.ddit.dao.MenuDAOImpl" />
-	<bean id="memberDAO"  class="kr.or.ddit.dao.MemberDAOImpl" />
+	<bean id="memberDAO" class="kr.or.ddit.dao.MemberDAOImpl" />
+	
 	<bean id="noticeDAO" class="kr.or.ddit.dao.NoticeDAOImpl" />
+	
 	<bean id="boardDAO" class="kr.or.ddit.dao.BoardDAOImpl" />
 	<bean id="replyDAO" class="kr.or.ddit.dao.ReplyDAOImpl" />
+	
+	<bean id="attachDAO" class="kr.or.ddit.dao.AttachDAOImpl" />
 	<bean id="pdsDAO" class="kr.or.ddit.dao.PdsDAOImpl" />
-	
-	<bean id="replyQnaDAO" class="kr.or.ddit.dao.ReplyQnaDAOImpl" />
-	<bean id="qnaDAO" class="kr.or.ddit.dao.QnaDAOImpl" />
-	
 	
 	<!-- Service layer -->
 	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl">
@@ -24,36 +25,32 @@
 	</bean>
 	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="memberDAO" ref-value="memberDAO" />
+		<property name="memberDAO" ref-value="memberDAO"/>
 	</bean>
 	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="noticeDAO" ref-value="noticeDAO" />
+		<property name="noticeDAO" ref-value="noticeDAO"/>
 	</bean>
 	<bean id="boardService" class="kr.or.ddit.service.BoardServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="boardDAO" ref-value="boardDAO" />
-		<property name="replyDAO" ref-value="replyDAO" />
-	</bean>
+		<property name="boardDAO" ref-value="boardDAO"/>
+		<property name="replyDAO" ref-value="replyDAO"/>
+	</bean>	
 	<bean id="replyService" class="kr.or.ddit.service.ReplyServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="replyDAO" ref-value="replyDAO" />
+		<property name="replyDAO" ref-value="replyDAO"/>
 	</bean>
 	
-<!-- 	<bean id="PdsService" class="kr.or.ddit.service.PdsServiceImpl"> -->
-<!-- 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" /> -->
-<!-- 		<property name="pdsDAO" ref-value="pdsDAO" /> -->
-<!-- 	</bean> -->
-	
-	
-	<bean id="qnaService" class="kr.or.ddit.service.QnaServiceImpl">
-    <property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-    <property name="qnaDAO" ref-value="qnaDAO" />
-    <property name="replyQnaDAO" ref-value="replyQnaDAO" />
-  </bean>
-  <bean id="replyQnaService" class="kr.or.ddit.service.ReplyQnaServiceImpl">
+	<bean id="pdsService" class="kr.or.ddit.service.PdsServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
-		<property name="replyQnaDAO" ref-value="replyQnaDAO" />
+		<property name="pdsDAO" ref-value="pdsDAO"/>
+		<property name="attachDAO" ref-value="attachDAO"/>
 	</bean>
 	
 </beans>
+
+
+
+
+
+

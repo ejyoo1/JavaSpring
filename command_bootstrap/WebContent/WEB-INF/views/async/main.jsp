@@ -21,8 +21,47 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="card col-lg-3">
-				<div class="card-header">헤더</div>
+			<div class="card col-lg-4">
+				<div class="card-header">결제할 문서함</div>
+				<div class="card-body">바디</div>
+				<div class="card-footer">푸터</div>
+			</div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+		</div><!-- ./row -->
+	</div><!-- ./container-fluid -->
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="card col-lg-4">
+				<div class="card-header">개인 문서함</div>
+				<div class="card-body">바디</div>
+				<div class="card-footer">푸터</div>
+			</div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+		</div><!-- ./row -->
+	</div><!-- ./container-fluid -->
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="card col-lg-4">
+				<div class="card-header">협조 문서함</div>
+				<div class="card-body">바디</div>
+				<div class="card-footer">푸터</div>
+			</div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-3"></div>
+		</div><!-- ./row -->
+	</div><!-- ./container-fluid -->
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="card col-lg-4">
+				<div class="card-header">협조 문서함</div>
 				<div class="card-body">바디</div>
 				<div class="card-footer">푸터</div>
 			</div>

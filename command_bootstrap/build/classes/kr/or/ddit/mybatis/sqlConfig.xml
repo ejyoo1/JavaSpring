@@ -15,7 +15,11 @@
 		<typeAlias type="kr.or.ddit.dto.NoticeVO" alias="notice" />
 		<typeAlias type="kr.or.ddit.dto.BoardVO" alias="board" />
 		<typeAlias type="kr.or.ddit.dto.ReplyVO" alias="reply" />
+		<typeAlias type="kr.or.ddit.dto.PdsVO" alias="pds" />
+		<typeAlias type="kr.or.ddit.dto.AttachVO" alias="attach" />
+		
 		<typeAlias type="kr.or.ddit.dto.QnaVO" alias="qna" />
+		
 	</typeAliases>
 
   <environments default="development">
@@ -39,6 +43,9 @@
     <mapper resource="kr/or/ddit/mybatis/Notice-Mapper.xml" />
     <mapper resource="kr/or/ddit/mybatis/Board-Mapper.xml" />
     <mapper resource="kr/or/ddit/mybatis/Reply-Mapper.xml" />
+    <mapper resource="kr/or/ddit/mybatis/Pds-Mapper.xml"/>
+    <mapper resource="kr/or/ddit/mybatis/Attach-Mapper.xml" />
+    
     
     <mapper resource="kr/or/ddit/mybatis/ReplyQna-Mapper.xml" />
     <mapper resource="kr/or/ddit/mybatis/Qna-Mapper.xml" />

@@ -17,7 +17,7 @@
 		<%@ include file="/WEB-INF/views/include/main_asside.jsp" %>
 		
 		<div class="content-wrapper">
-			<iframe name="ifr" src="/main.do" frameborder="0" style="width:100%;height:80vh;"></iframe>
+			<iframe name="ifr" src="/main.do" frameborder="0" style="width:100%;height:85vh;"></iframe>
 		</div> <!-- ./content-wrapper -->
 		<%@ include file="/WEB-INF/views/include/main_footer.jsp" %>
 	
