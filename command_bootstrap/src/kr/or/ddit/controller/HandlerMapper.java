@@ -43,15 +43,10 @@ public class HandlerMapper {
 				Method[] methods = actionClass.getMethods();
 				for (Method method : methods) {
 					if (method.getName().contains("set")) {
-						INFO_LOGGER.info("method.getParameterTypes() : " + method.getParameterTypes());
-						INFO_LOGGER.info("method.getParameterTypes()[0] : " + method.getParameterTypes()[0]);
-						INFO_LOGGER.info("method.getParameterTypes()[0].getName() : " + method.getParameterTypes()[0].getName());
 						String paramType = method.getParameterTypes()[0].getName();
 						paramType=paramType.substring(paramType.lastIndexOf(".")+1);
-						INFO_LOGGER.info("paramTypeBefore : " + paramType);
 						
 						paramType=(paramType.charAt(0) + "").toLowerCase() + paramType.substring(1); // set 자르고 첫글자 소문자 변경
-						INFO_LOGGER.info("paramTypeAfter : " + paramType);
 						try {
 							method.invoke(commandAction, 
 									ApplicationContext.getApplicationContext().get(paramType)); // set 메서드 할 클래스, 사용할 클래스 ==> invoke

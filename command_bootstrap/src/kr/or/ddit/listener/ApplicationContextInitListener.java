@@ -28,13 +28,11 @@ public class ApplicationContextInitListener implements ServletContextListener {
     	ServletContext ctx = ctxEvent.getServletContext();
     	
     	String beanConfigXml = ctx.getInitParameter("contextConfigLocation");
-    	INFO_LOGGER.info("beanConfigXml : " + beanConfigXml);
     	
     	if(beanConfigXml == null) return;
     	
     	beanConfigXml = ctx.getRealPath("/")
     			+ beanConfigXml.replace("classpath:", "WEB-INF/classes/").replace("/", File.separator);
-    	INFO_LOGGER.info("beanConfigXml : " + beanConfigXml);
     	
     	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance(); // 팩토리 객체를 생성
     	
@@ -78,14 +76,10 @@ public class ApplicationContextInitListener implements ServletContextListener {
     						 String name = ele.getAttribute("name");
     						 String ref = ele.getAttribute("ref-value");
     						 
-    						 INFO_LOGGER.info("name : " + name + ", ref : " + ref);
-    						 
     						 String setMethodName = "set" + name.substring(0,1).toUpperCase()
     								 + name.substring(1);
-    						 INFO_LOGGER.info("setMethodName : " + setMethodName);
     						 
     						 String className = eleBean.getAttribute("class");
-    						 INFO_LOGGER.info("className : " + className);
     						 Class<?> classType = Class.forName(className);
     						 Method[] methods = classType.getMethods(); // setMethod
     						 for(Method method : methods) { // 리플렉션 (변수 호출 X 직접 하기)

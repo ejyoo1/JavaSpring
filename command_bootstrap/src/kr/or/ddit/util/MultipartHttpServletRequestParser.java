@@ -1,5 +1,6 @@
 package kr.or.ddit.util;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,9 +28,6 @@ public class MultipartHttpServletRequestParser {
 	
 	Map<String, String[]> paramString = new HashMap<String, String[]>();
 	Map<String, List<FileItem>> paramFile = new HashMap<String, List<FileItem>>();
-	{
-		INFO_LOGGER.info("■■■MultipartHttpServletRequestParser■■■");
-	}
 	
 	// 파일 사이즈 기본값
 	public MultipartHttpServletRequestParser(HttpServletRequest request)
@@ -52,13 +50,10 @@ public class MultipartHttpServletRequestParser {
 		// 코어부분 굉장히 중요 --> item형식 리스트로 줌
 		// 파일이 몇개올지 모르므로 List로
 		List<FileItem> formItems = upload.parseRequest(request);
-		INFO_LOGGER.info("formItems.size() : " + formItems.size());
 		// 파일 아이템인지 구분
 		for (FileItem item : formItems) {
 			// 필드
 			String paramName = item.getFieldName();
-			INFO_LOGGER.info("paramName : " + paramName);
-			INFO_LOGGER.info("item.getString() : " + item.getString());
 			
 			// 일반 파라미터이면 K,V 삽입(Multipart는 key하나에 value가 ','를 구분자로 가지고 있음.)
 			if(item.isFormField()) {
@@ -75,8 +70,6 @@ public class MultipartHttpServletRequestParser {
 					this.paramFile.put(paramName, files); // Map에 ArrayList 삽입
 				} // 준비 완료
 				
-				INFO_LOGGER.info("files.size() : " + files.size());
-				
 				files.add(item); // 아이템 하나 하나 찍기
 			}
 		}
@@ -84,7 +77,12 @@ public class MultipartHttpServletRequestParser {
 	
 	// 파라미터 하나만 주는 것
 	public String getParameter(String paramName) {
-		return this.paramString.get(paramName)[0];
+		String[] param = this.paramString.get(paramName);
+		String result = null;
+		if(param != null) {
+			result = param[0];
+		}
+		return result;
 	}
 	
 	// 파라미터 여러개 주는것
@@ -112,13 +110,21 @@ public class MultipartHttpServletRequestParser {
 	}
 	
 	public FileItem getFileItem(String paramName) {
-		return paramFile.get(paramName).get(0);
+		List<FileItem> itemList = paramFile.get(paramName);
+		FileItem result = null;
+		
+		if(itemList != null) result = itemList.get(0);
+		
+		return result;
 	}
 	
 	public FileItem[] getFileItems(String paramName) { // 파일 목록을 줄때는 변하지 않을것이므로 배열로 줌. ArrayList는 길이를 모를때 사용함.
 		List<FileItem> items = paramFile.get(paramName);
-		FileItem[] files = new FileItem[items.size()];
-		items.toArray(files); // ArrayList와 배열과 크기가 맞아야 함.
-		return files;
+	      FileItem[] files = null;
+	      if(items != null) {
+	         files = new FileItem[items.size()];
+	         items.toArray(files);
+	      }
+	      return files;
 	}
 }

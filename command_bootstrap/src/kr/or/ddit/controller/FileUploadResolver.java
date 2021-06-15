@@ -12,7 +12,6 @@ import kr.or.ddit.dto.AttachVO;
 import kr.or.ddit.util.MakeFileName;
 
 public class FileUploadResolver { 
-	private static final Logger EXCEPTION_LOGGER = Logger.getLogger(FileUploadResolver.class);
 	private static final Logger INFO_LOGGER = Logger.getLogger(FileUploadResolver.class);
 	// FileItem ==> MultipartHttpServletRequestParser 가져옴.
 	public static List<AttachVO> fileUpload(FileItem[] items, String uploadPath) throws Exception{
@@ -26,13 +25,10 @@ public class FileUploadResolver {
 		if(items != null) 
 			for(FileItem item : items) {
 				if(!item.isFormField()) {
-					INFO_LOGGER.info("파일 필드입니다.");
+					INFO_LOGGER.info("파일 필드입니다. UUID 부여를 시작합니다...");
 					String fileName = new File(item.getName()).getName();
-					INFO_LOGGER.info("fileNameUUID_before : " + fileName);
 					fileName = MakeFileName.toUUIDFileName(fileName, "$$");
-					INFO_LOGGER.info("fileNameUUID_After : " + fileName);
 					String filePath = uploadPath + File.separator + fileName;
-					INFO_LOGGER.info("UploadPath+fileName : " + filePath);
 					File storeFile = new File(filePath);
 					
 					// local HDD 에 저장

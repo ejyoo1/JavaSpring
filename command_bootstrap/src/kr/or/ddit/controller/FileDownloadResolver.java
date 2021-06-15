@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,9 +38,18 @@ public class FileDownloadResolver {
 		
 		// 다른 게시판에서도 사용할 것이기 때문에 아래 작업 수행.
 		String headerKey = "Content-Disposition";
-		String headerValue = String.format("attachment; filename=\"%s\"",
-				MakeFileName.parseFileNameFromUUID(downloadFile.getName(), "\\$\\$"));// UUID 떼고 $$떼어 원본 파일 명만 가져옴
-				
+		
+		String sendFileName = MakeFileName.parseFileNameFromUUID(downloadFile.getName(), "\\$\\$");// UUID 떼고 $$떼어 원본 파일 명만 가져옴
+		
+		// 유형 별 처리
+		String header = request.getHeader("User-Agent");
+		if(header.contains("MSIE")) { // 익스플로러
+			sendFileName = URLEncoder.encode(sendFileName,"UTF-8"); //브라우저 별 관리
+		} else {
+			sendFileName = new String(sendFileName.getBytes("utf-8"),"ISO-8859-1"); // 한글 깨짐 방지 => 윈도우 OS 인코딩 설정 : ISO-8859-1
+		}
+		
+		String headerValue = String.format("attachment; filename=\"%s\"", sendFileName);
 		response.setHeader(headerKey, headerValue);
 		
 		// 파일 내보내기

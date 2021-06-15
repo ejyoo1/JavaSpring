@@ -103,7 +103,7 @@
     		
     		var input=$('<input>').attr({"type":"file","name":"uploadFile"}).css("display","inline"); 
     		var div=$('<div>').addClass("inputRow");
-    		div.append(input).append("<button style='border:0;outline:0;' class='badge bg-red' type='button'>X</button");    		   		
+    		div.append(input).append("<button style='border:0;outline:0;' class='badge bg-red' type='button'>X</button>");    		   		
     		$('.fileInput').append(div);
     	}
     	
